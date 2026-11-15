@@ -1,7 +1,7 @@
 ---
 title: 因果識別的前提假設
 type: concept
-sources: [williams2024]
+sources: [williams2024, renson2025]
 updated: 2026-11-15
 ---
 
@@ -34,6 +34,16 @@ updated: 2026-11-15
 - 漏訪與拒絕尿檢視為鴉片使用陽性，論文稱之為合理假設。[williams2024, p.5]
 - 這些假設在範例資料中是否成立、如何檢驗：來源未提及。
 
+### 在 renson2025 中
+
+- renson2025 用同樣三個假設來識別範例的因果參數（不治療時的期望潛在結局）：條件可交換性 `Y^0 ⊥ A | W`；正值性 `f(w) > 0 ⇒ Pr(A=0 | W=w) > 0`；因果一致性 `A=a ⇒ Y=Y^a`。[renson2025, p.2]
+- 在這個例子裡，正值性只寫成「不接受治療」這一側的機率要大於零。[renson2025, p.2]
+- 三個假設成立時，因果參數等於統計估計目標 `E[Y^0] = E(E(Y | W, A=0))`，見 [[statistical-estimand]]。[renson2025, p.2]
+- 論文指出：若識別依賴較少見的假設，可能還沒有現成的估計式，這是需要自己推導估計式的情況之一。[renson2025, p.1]
+- 論文認為，流行病學家常走在最前面，負責定義新問題、翻成因果參數，並提出合理的識別假設。[renson2025, p.1]
+- 估計階段還需要一個「溫和條件」，是一種正值性：g 與 ĝ 都介於 `(ε, 1 − ε)`，ε 大於零。詳見 [[rate-double-robustness]]。[renson2025, p.4]
+- 這些假設在實際資料中如何檢驗：來源未提及。
+
 ## 常見誤解
 
 - 「資料來自隨機試驗，所以所有假設自動成立」：論文的 BUP-NX 組內，劑量調整是依臨床判斷，而不是隨機分派，所以仍以干擾因子調整。[williams2024, p.5]
@@ -44,4 +54,6 @@ updated: 2026-11-15
 - [[blip-function]]
 - [[doubly-robust-learner]]
 - [[decision-points-and-history]]
-- 來源頁：[[williams2024]]
+- [[statistical-estimand]]
+- [[rate-double-robustness]]
+- 來源頁：[[williams2024]]、[[renson2025]]

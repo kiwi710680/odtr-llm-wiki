@@ -1,13 +1,13 @@
 ---
 title: 術語表
 type: glossary
-sources: [williams2024]
+sources: [williams2024, renson2025]
 updated: 2026-11-15
 ---
 
 # 術語表
 
-每列：中文 ／ English ／ 一句話定義 ／ 詳見頁面。定義只依據已 ingest 的來源；目前來源：[[williams2024]]。
+每列：中文 ／ English ／ 一句話定義 ／ 詳見頁面。定義只依據已 ingest 的來源；目前來源：[[williams2024]]、[[renson2025]]。
 
 | 中文 | English | 一句話定義 | 詳見 |
 |---|---|---|---|
@@ -23,15 +23,29 @@ updated: 2026-11-15
 | 條件平均處理效應 | conditional average treatment effect（CATE） | 在 V 條件下兩種治療的結局差，常稱 blip 函數。[williams2024, p.3] | [[blip-function]] |
 | Blip 函數 | blip function | CATE 的別名，是迴歸式學出最佳規則的關鍵成分。[williams2024, p.3] | [[blip-function]] |
 | 無偏轉換 | unbiased transformation | 資料的函數，其在 V 條件下的期望值等於 blip。[williams2024, p.3] | [[doubly-robust-learner]] |
-| 增強型逆機率加權 | augmented inverse probability weighting（AIPW） | 論文採用的倍增穩健無偏轉換。[williams2024, p.3] | [[doubly-robust-learner]] |
+| 增強型逆機率加權 | augmented inverse probability weighting（AIPW） | 論文採用的倍增穩健無偏轉換。[williams2024, p.3] renson2025 中，AIPW 估計式就是單步估計式。[renson2025, p.3] | [[doubly-robust-learner]]、[[plug-in-and-one-step-estimators]] |
 | 倍增穩健 | doubly robust | Q 或 g 只要有一個被一致估計，就能得到無偏的 blip 估計。[williams2024, p.3] | [[doubly-robust-learner]] |
 | 傾向分數 | propensity score | 實際拿到所觀察到治療的機率，論文中記為 g(A, H)。[williams2024, p.3] | [[doubly-robust-learner]] |
 | Q 學習 | Q-learning | 以條件平均處理效應迴歸為基礎的 ODTR 估計方法之一。[williams2024, p.3] | [[optimal-dynamic-treatment-rule]] |
 | 超級學習器 | super learner | 以另一個演算法（元學習器）組合一組使用者指定學習器的預測。[williams2024, p.5] | [[doubly-robust-learner]] |
-| 交叉擬合 | cross-fitting | 範例中用來估計 Q 與 g 的做法，論文在別處以樣本分割說明可避開平滑性要求。[williams2024, p.5] | [[doubly-robust-learner]] |
+| 交叉擬合 | cross-fitting | 範例中用來估計 Q 與 g 的做法，論文在別處以樣本分割說明可避開平滑性要求。[williams2024, p.5] renson2025 中，要求干擾估計式在另一份樣本擬合，簡單版是把樣本分成兩半再交換。[renson2025, p.4] | [[doubly-robust-learner]]、[[cross-fitting]] |
 | 一致性 | consistency | 觀察到的治療水準下，反事實結局就是實際觀察到的結局。[williams2024, p.3] | [[identification-assumptions]] |
 | 可交換性（無未測量干擾） | exchangeability（no unmeasured confounding） | 所有同時影響暴露與結局的共同原因都已測量並調整。[williams2024, p.3] | [[identification-assumptions]] |
 | 正值性 | positivity | 在所有層內，各治療水準出現的機率都不為零。[williams2024, p.3] | [[identification-assumptions]] |
 | 回到規律鴉片使用 | return to regular opioid use（RROU） | 論文範例的結局，定義見來源頁。[williams2024, p.5] | [[williams2024]] |
 | 鴉片使用障礙 | opioid use disorder（OUD） | 論文範例的疾病情境。[williams2024, p.1] | [[williams2024]] |
 | 丁基原啡因加納洛酮 | buprenorphine-naloxone（BUP-NX） | 論文範例中被調整劑量的藥物。[williams2024, p.1] | [[williams2024]] |
+| 估計目標 | estimand | 想知道的那個量；統計估計目標是只依賴觀察資料分布的映射 ψ(P)。[renson2025, p.2] | [[statistical-estimand]] |
+| 估計式 | estimator | 從資料算出估計目標的方法，例如代入式、單步估計式。[renson2025, p.3] | [[statistical-estimand]]、[[plug-in-and-one-step-estimators]] |
+| 識別 | identification | 用因果假設把因果參數等同於只依賴觀察資料分布的統計估計目標。[renson2025, p.2] | [[statistical-estimand]]、[[identification-assumptions]] |
+| 干擾函數 | nuisance function | 需要估計但不是最終目標的函數，例如結局迴歸、傾向分數。[renson2025, p.1] | [[nuisance-functions]] |
+| 有效影響函數 | efficient influence function（EIF） | 估計目標對資料分布的導數，描述估計式的一階誤差。[renson2025, p.2] | [[efficient-influence-function]] |
+| 路徑可微分性 | pathwise differentiability | EIF 存在的條件：映射的導數存在且變異數有限。[renson2025, p.3] | [[efficient-influence-function]] |
+| 代入式估計式 | plug-in estimator | 把估計出的分布各部分代進估計目標，範例中對應 g 計算法。[renson2025, p.3] | [[plug-in-and-one-step-estimators]] |
+| g 計算法 | g-computation | 代入式估計式在範例中的別名；用機器學習時一般無法正確推論。[renson2025, p.3] | [[plug-in-and-one-step-estimators]] |
+| 單步估計式 | one-step estimator | 代入式加上估計 EIF 的樣本平均，範例中等同 AIPW。[renson2025, p.3] | [[plug-in-and-one-step-estimators]] |
+| 目標最大概似估計 | targeted minimum loss/maximum likelihood estimation（TMLE） | 另一類 EIF 型估計式，論文只簡述。[renson2025, p.5] | [[plug-in-and-one-step-estimators]] |
+| 收斂速率 | convergence rate | 估計式的偏差與變異數趨近於零的快慢。[renson2025, p.3] | [[rate-double-robustness]] |
+| 速率倍增穩健 | rate double robustness | 估計式的收斂速率等於兩個干擾函數收斂速率的乘積。[renson2025, p.4] | [[rate-double-robustness]] |
+| 倍增穩健一致性 | doubly robust consistency | 兩個干擾估計式只要有一個設定正確，估計式就一致。[renson2025, p.4] | [[rate-double-robustness]]、[[doubly-robust-learner]] |
+| 樣本分割 | sample splitting | 讓干擾函數與最後估計式使用不同樣本的做法，交叉擬合是其一種。[renson2025, p.4] | [[cross-fitting]] |

@@ -6,6 +6,7 @@
 ## 來源（sources）
 
 - [[williams2024]] — Williams 等人：從縱貫資料學習最佳動態治療規則（教學型論文，BUP-NX 劑量範例）。
+- [[renson2025]] — Renson 等人：從統計估計目標推導機器學習估計式（EIF、單步估計式、速率倍增穩健）。
 
 ## 概念（concepts）
 
@@ -16,10 +17,16 @@
 - [[blip-function]] — Blip 函數（條件平均處理效應）。
 - [[doubly-robust-learner]] — 倍增穩健學習器：從資料學出規則的方法。
 - [[identification-assumptions]] — 因果識別的前提假設。
+- [[statistical-estimand]] — 統計估計目標：想知道什麼數字，與估計式的差別。
+- [[nuisance-functions]] — 干擾函數：結局迴歸、傾向分數等輔助估計對象。
+- [[efficient-influence-function]] — 有效影響函數（EIF）：估計目標的「斜率」。
+- [[plug-in-and-one-step-estimators]] — 代入式與單步（AIPW）估計式。
+- [[rate-double-robustness]] — 速率倍增穩健：為什麼能配機器學習又有有效推論。
+- [[cross-fitting]] — 交叉擬合與樣本分割。
 
 ## 比較與綜合（syntheses）
 
-（尚無）
+- [[method-comparison]] — 方法比較：估計式家族，以及「倍增穩健」在兩篇中的兩種意思。
 
 ## 術語表
 

@@ -71,4 +71,4 @@ updated: 2026-11-15
 
 - 核心概念頁：[[dynamic-treatment-regime]]、[[decision-points-and-history]]、[[optimal-dynamic-treatment-rule]]、[[treatment-effect-heterogeneity]]、[[blip-function]]、[[doubly-robust-learner]]、[[identification-assumptions]]。
 - 名詞速查見 [[glossary]]。
-- 目前只 ingest 了這一篇，與其他來源的比較來源未提及。
+- 和 [[renson2025]] 的關係：兩篇都用到倍增穩健與交叉擬合，用法的異同整理在 [[method-comparison]]。

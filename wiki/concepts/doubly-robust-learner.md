@@ -1,7 +1,7 @@
 ---
 title: 倍增穩健學習器（從資料學出規則的方法）
 type: concept
-sources: [williams2024]
+sources: [williams2024, renson2025]
 updated: 2026-11-15
 ---
 
@@ -32,6 +32,15 @@ updated: 2026-11-15
 - 論文提供的 R 套件在 GitHub 上可下載，並以有限的模擬研究確認實作正確。[williams2024, p.4]
 - 一致估計最佳規則下的平均結局另需額外條件，見 [[identification-assumptions]]；其中一個條件是這些被估計的函數「夠平滑」，但可以用樣本分割（sample-splitting）繞過。[williams2024, p.4]
 
+### 在 renson2025 中
+
+- renson2025 解釋為什麼倍增穩健（EIF 型）估計式適合搭配機器學習：以平均處理效應為例，倍增穩健估計式在使用機器學習時，仍可得到（大樣本下）名目涵蓋率的信賴區間，g 計算法除了特殊情況外做不到。[renson2025, p.1]
+- 它的範例估計式（單步估計式）就是增強型逆機率加權（AIPW）估計式，估計的是不治療時的平均結局，而不是 blip 函數。[renson2025, p.3]
+- 論文把「倍增穩健」拆成兩個不同的性質：倍增穩健一致性（兩個干擾估計式有一個設定正確就一致）與速率倍增穩健（誤差是兩個干擾估計式誤差的乘積）。詳見 [[rate-double-robustness]]。[renson2025, p.4]
+- 論文的變異數估計式要求兩個干擾函數都被一致估計，這在使用機器學習時可能是合理的。[renson2025, p.5]
+- 干擾函數、交叉擬合與單步估計式的細節，見 [[nuisance-functions]]、[[cross-fitting]]、[[plug-in-and-one-step-estimators]]；兩篇對照見 [[method-comparison]]。
+- renson2025 是否討論動態治療規則或 blip 函數的學習：來源未提及。
+
 ## 常見誤解
 
 - 「倍增穩健就是不會錯」：它只要求 Q 與 g 其中一個被一致地估計；論文另外列出推論還需要的條件。[williams2024, p.4]
@@ -44,5 +53,10 @@ updated: 2026-11-15
 - [[identification-assumptions]]
 - [[optimal-dynamic-treatment-rule]]
 - [[decision-points-and-history]]
-- 來源頁：[[williams2024]]
+- [[rate-double-robustness]]
+- [[cross-fitting]]
+- [[nuisance-functions]]
+- [[plug-in-and-one-step-estimators]]
+- [[method-comparison]]
+- 來源頁：[[williams2024]]、[[renson2025]]
 - 名詞速查：[[glossary]]
