@@ -1,4 +1,4 @@
-# Workflow: /topic-slides — teaching HTML deck from the wiki (graph v2)
+# Workflow: /topic-slides — teaching HTML deck from the wiki (graph v2.1)
 
 Changes from v1 (after the first real run, see `docs/run_notes.md`):
 - **G4b term check moved forward** from the G5 AI review to a script at the draft node: a glossary
@@ -14,7 +14,8 @@ textbook definitions the wiki does not contain (plus 1 that was wrong). So N4 ma
 `wiki/glossary.md` and the concept pages of its claims, and **a gloss must be copied or condensed
 from those pages** — the same "only from the wiki" rule as bullets. G5 checks glosses against them.
 
-Input: a topic sentence. Output: `topic-<slug>/deck.html` + `topic-<slug>/report.md`.
+Input: a topic sentence. Output: `topic-<slug>/deck.html` + check records (`topic-<slug>/review*.md`, `docs/run_notes.md`);
+for this homework the human-readable report is `site/index.html`.
 Only wiki content may be used — never `raw/` and never general knowledge.
 Every state is a file in `topic-<slug>/`, so each node can be opened, committed and re-run alone.
 

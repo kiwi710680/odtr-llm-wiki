@@ -77,7 +77,7 @@
   <p><b>主題：最佳動態治療策略（optimal dynamic treatment regimes, ODTR）</b>。治療常常不是一次決定，而是一連串「看病人現在怎樣，再決定下一步」的決策；ODTR 研究的是怎麼從資料學出「每個時間點、對什麼樣的人、該給什麼治療」的規則。</p>
   <p><b>讀者：</b>沒學過因果推論的同學。所以每頁先講直覺、再講術語，術語第一次出現寫「中文（English）」。</p>
   <h3>先討論、後生成</h3>
-  <p>AI 先不建任何檔案，分兩輪問我 8 題（讀者、語言、頁面類型、出處粒度、矛盾處理、一次一篇或批次、lint 檢查項目、主題與來源），整理成需求摘要，我確認後才生成 <code>AGENTS.md</code>（<code>CLAUDE.md</code> 只寫一行 <code>@AGENTS.md</code>）。課堂投影片列的「AI 至少該問到」8 項都有問到。完整紀錄：<code>docs/01_interview.md</code>。</p>
+  <p>AI 先不建任何檔案，分兩輪問我 8 題（讀者、語言、頁面類型、出處粒度、矛盾處理、一次一篇或批次、lint 檢查項目、主題與來源），整理成需求摘要，我確認後才生成 <code>AGENTS.md</code>（<code>CLAUDE.md</code> 只寫一行 <code>@AGENTS.md</code>）。課堂投影片列的「AI 至少該問到」8 項中，7 項由 AI 提問、第 8 項「之後要產出什麼」由作業本身指定（教學 HTML 簡報）。完整紀錄：<code>docs/01_interview.md</code>。</p>
   <div class="tbl"><table>
     <thead><tr><th>決定</th><th>我的選擇</th><th>寫進 AGENTS.md 的規則</th></tr></thead>
     <tbody>
@@ -199,12 +199,12 @@
     <thead><tr><th>節點</th><th>結果</th><th>退回／修正</th></tr></thead>
     <tbody>
       <tr><td>N1 → G1</td><td><span class="pill pass">PASS</span></td><td>選 18 頁，5 篇都覆蓋</td></tr>
-      <tr><td>N2 → G2</td><td><span class="pill fail">2 張卡 FAIL</span></td><td>desman2025：數字 20 在 wiki 那行同時引 p.5 和 p.6，卡片只抄 p.5 → 拿掉數字。bluemlein2022：<code>number '8059' is not in [[bluemlein2022]]</code> → <b>檢查程式的錯</b>（頁面寫「8,059」沒先正規化）→ 修 check_deck、補回數字</td></tr>
+      <tr><td>N2 → G2</td><td><span class="pill fail">2 張卡 FAIL</span></td><td>desman2025：數字 20 在 wiki 那行同時引 p.5 和 p.6，卡片只抄 p.5 → 拿掉數字。bluemlein2022：<code>number '8059' is not in [[bluemlein2022]]</code> → <b>檢查程式的錯</b>（wiki 頁寫「8, 059」，比對前沒先正規化）→ 修 check_deck、補回數字</td></tr>
       <tr><td>N3 + 人工</td><td><span class="pill pass">PASS</span></td><td>我讀大綱時發現缺「前提假設」子題 → 走「缺子題 → 補卡」退回路線；使用者確認 14 頁大綱</td></tr>
       <tr><td>N4 → G4</td><td><span class="pill pass">PASS</span></td><td>第一次就過</td></tr>
       <tr><td>N5 → G6</td><td><span class="pill pass">PASS</span></td><td>「全過」反而可疑 → 手動量測＋截圖：溢出檢查是對的，但<b>模板</b>有錯（縮放後偏移、#頁碼無效）→ 修模板</td></tr>
       <tr><td>G5 第 1 輪</td><td><span class="pill fail">9/14 頁 FAIL</span></td><td>6 頁術語沒解釋；s03 把「d1 很簡單」寫成「最簡單」；s07 把 hong2021「沒討論前提」掛成「需要前提」；s14 把單篇限制寫成通則；s04 自創沒出處的總結</td></tr>
-      <tr><td>第 2 輪</td><td><span class="pill fail">8 頁 FAIL</span></td><td>上一輪問題修好了，但<b>新出現 5 個超出 wiki 的術語註解＋3 個實質錯</b>（例：s12 把「報酬」當成「獎勵」，但報酬是逐小時累加）</td></tr>
+      <tr><td>第 2 輪</td><td><span class="pill fail">8 頁 FAIL</span></td><td>上一輪問題大多修好（s08、s12 只修好一部分），但<b>新出現 5 個超出 wiki 的術語註解＋3 個實質錯</b>（例：s12 把「報酬」當成「獎勵」，但報酬是逐小時累加）</td></tr>
       <tr><td>第 3 輪（最後一輪）</td><td><span class="pill pass">PASS</span></td><td>註解全部改用 wiki 術語表／概念頁的說法；三個實質錯照 wiki 改。全新 reviewer：8 頁全過、上輪問題全修好；留下 13 條非阻擋建議（例：s07 標題說「三個前提」但第二點是第四個條件），記錄在 <code>topic-dtr/review.md</code>，沒有再開第 4 輪（已到剎車上限）</td></tr>
     </tbody>
   </table></div>
@@ -214,7 +214,7 @@
 <section id="s6">
   <h2><span class="no">6</span>反思</h2>
   <h3>哪一個節點最常出錯？</h3>
-  <p><b>N4 逐頁稿。</b>第 1 輪 G5 的 9 頁失敗，每一頁都有寫稿時產生的錯：術語沒解釋（6 頁）、封面句沒指派 claim、把「很簡單」寫成「最簡單」、自己加一句沒出處的總結；其中 2 頁另外還有卡片帶來的錯。第 2 輪又在同一個節點冒出新的錯（自己的知識寫成的術語定義）。原因很直接：寫稿要把論文語言「翻成白話」，翻譯本身就是最容易加料或說過頭的地方。</p>
+  <p><b>N4 逐頁稿。</b>第 1 輪 G5 的 9 頁失敗，每一頁都有寫稿時產生的錯：術語沒解釋（6 頁）、封面寫了事實句卻沒有對應的 claim（源頭其實在大綱沒指派）、把「很簡單」寫成「最簡單」、自己加一句沒出處的總結；其中 2 頁另外還有卡片帶來的錯。第 2 輪又在同一個節點冒出新的錯（自己的知識寫成的術語定義）。原因很直接：寫稿要把論文語言「翻成白話」，翻譯本身就是最容易加料或說過頭的地方。</p>
   <p>另外兩個意外：</p>
   <ul>
     <li><b>有些錯的源頭在更前面的 N2 證據卡</b>（hong2021 的卡把「沒討論前提」寫成「需要前提」）——退回逐頁稿修不好，必須退回那張卡。</li>
@@ -222,7 +222,7 @@
   </ul>
   <h3>發現問題後，把檢查往前移到哪一步？</h3>
   <ol>
-    <li><b>術語檢查：從 G5（最後的 AI 審查）移到 G4（寫稿當下的腳本）。</b>新規則 G4b：<code>wiki/glossary.md</code> 裡的術語，在第一次出現的那頁要有（…）註解或出現在講者備註。對第 1 輪的稿子跑，抓到 17 處，涵蓋 AI 審查抓到的術語頁，還多抓到 5 頁 AI 沒標出術語問題的頁面。</li>
+    <li><b>術語檢查：從 G5（最後的 AI 審查）移到 G4（寫稿當下的腳本）。</b>新規則 G4b：<code>wiki/glossary.md</code> 裡的術語，在第一次出現的那頁要有（…）註解或出現在講者備註。對第 1 輪的稿子跑，抓到 17 處，AI 審查標出「外行看不懂」的 6 頁裡涵蓋了 5 頁（s12 的問題是報酬數字沒有尺度，不是術語表裡的詞，腳本抓不到），還多抓到 5 頁 AI 沒標出術語問題的頁面。</li>
     <li><b>主詞與範圍：移到 N2 證據卡。</b>每條 claim 要寫出「是哪篇、哪個情境」的發現，避免到了簡報才被推廣成通則。</li>
     <li><b>長度預算：移到 N4。</b>每頁 ≤5 點、每點約 60 字，不等渲染後才發現溢出。</li>
     <li><b>Wiki 那一側</b>：本來就是每篇 ingest 完立刻 lint，而不是五篇做完才查；這讓每個錯都能定位到一篇論文、一個 commit。</li>
