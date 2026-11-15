@@ -1,7 +1,7 @@
 ---
 title: Blip 函數（條件平均處理效應）
 type: concept
-sources: [williams2024, bluemlein2022]
+sources: [williams2024, bluemlein2022, hong2021]
 updated: 2026-11-15
 ---
 
@@ -40,6 +40,13 @@ updated: 2026-11-15
 - 與 williams2024 的對照：williams2024 的範例以 ℓ1 正規化估計 blip；bluemlein2022 直接用樹或森林估計。[williams2024, p.5] [bluemlein2022, p.9]
 - 真實資料的樹中，每片葉子標示該亞群的估計處理效應與對應的最佳決定。[bluemlein2022, p.16-17]
 
+### 在 hong2021 中
+
+- 論文把死亡結局的期望值拆成兩塊：「沒有治療的模型」加上「blip 函數」；blip 函數由一組參數表達，描述治療（這裡是機械功率劑量）的效果。[hong2021, p.3]
+- 這裡的治療是連續劑量：MP 的分布假設為 Gamma 分布，連結函數取對數；blip 中同時有 MP 的一次項與二次項。與一次項交互的變數包含年齡、呼吸速率、收縮壓、心率、類別、血氣與實驗室指標；與二次項交互的只有類別與 P/F 比值。[hong2021, p.3]
+- 本 wiki 的讀法（不是論文的話）：劑量只有一次項時，結局對劑量是一條直線，最佳劑量只會落在可用範圍的兩端；加入二次項，最佳劑量才可能落在中間。
+- 與前兩篇不同：williams2024 與 bluemlein2022 的 blip 是「給治療」減「不給治療」的差，hong2021 的 blip 是劑量的函數；blip 係數的數值，以及相對於哪個基準劑量：來源未提及。[williams2024, p.3] [williams2024, p.5] [bluemlein2022, p.5] [hong2021, p.3]
+
 ## 常見誤解
 
 - 「blip 是某一個人的真實效果」：它是在 V 相同的人之中的平均差，不是個人的效果；論文把它稱為 CATE。[williams2024, p.3]
@@ -53,4 +60,4 @@ updated: 2026-11-15
 - [[identification-assumptions]]
 - [[causal-tree-and-forest]]
 - [[q-learning-dwols-g-estimation]]
-- 來源頁：[[williams2024]]、[[bluemlein2022]]
+- 來源頁：[[williams2024]]、[[bluemlein2022]]、[[hong2021]]

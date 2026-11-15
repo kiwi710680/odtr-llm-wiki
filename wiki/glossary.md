@@ -1,13 +1,13 @@
 ---
 title: 術語表
 type: glossary
-sources: [williams2024, renson2025, bluemlein2022]
+sources: [williams2024, renson2025, bluemlein2022, hong2021]
 updated: 2026-11-15
 ---
 
 # 術語表
 
-每列：中文 ／ English ／ 一句話定義 ／ 詳見頁面。定義只依據已 ingest 的來源；目前來源：[[williams2024]]、[[renson2025]]、[[bluemlein2022]]。
+每列：中文 ／ English ／ 一句話定義 ／ 詳見頁面。定義只依據已 ingest 的來源；目前來源：[[williams2024]]、[[renson2025]]、[[bluemlein2022]]、[[hong2021]]。
 
 | 中文 | English | 一句話定義 | 詳見 |
 |---|---|---|---|
@@ -66,3 +66,12 @@ updated: 2026-11-15
 | 期望增益 | expected gain（reward） | 真實資料中，依估計的最佳 DTR 治療相對於實際治療的預期結局增加量。[bluemlein2022, p.16] | [[regret-and-decision-accuracy]] |
 | 序列可交換性 | sequential exchangeability | 以病史為條件，足以移除估計 HTE 時的干擾偏誤。[bluemlein2022, p.6] | [[identification-assumptions]] |
 | 治療後偏誤 | post-treatment bias | 把治療後才量到的共變數放進模型，會「解釋掉」治療效果而造成的偏誤。[bluemlein2022, p.6] | [[backward-recursion]] |
+| 急性呼吸衰竭 | acute respiratory failure（ARF） | 需要立即處置的急症；論文定義為在室內空氣下低血氧與／或高二氧化碳。[hong2021, p.1] [hong2021, p.2] | [[hong2021]] |
+| 機械通氣 | mechanical ventilation（MV） | 重症 ARF 常需要的侵入性通氣，能維持氣體交換但也可能造成肺損傷。[hong2021, p.1] | [[mechanical-power]] |
+| 機械功率 | mechanical power（MP） | 把平台壓、呼吸速率、PEEP 等機械參數合成一個數字，單位 Joules/min。[hong2021, p.1] | [[mechanical-power]] |
+| 靜態／動態機械功率 | MP_static／MP_dynamic | MP 的兩個版本；靜態版與存活的關聯較強，DTR 只最佳化靜態版。[hong2021, p.2] [hong2021, p.3] | [[mechanical-power]] |
+| ΔMP | ΔMP | 實際 MP 減最佳 MP；等於零代表實際用的就是最佳值。[hong2021, p.3] [hong2021, p.5] | [[mechanical-power]]、[[regret-and-decision-accuracy]] |
+| 有限混合模型 | finite mixture modeling（FMM） | 又稱潛在剖面分析，把病人依特徵自動分成幾類，每人屬於各類的機率不同。[hong2021, p.2] | [[finite-mixture-subphenotypes]] |
+| 潛在剖面分析 | latent profile analysis（LPA） | 有限混合模型的別名。[hong2021, p.2] | [[finite-mixture-subphenotypes]] |
+| 表型／亞型 | phenotype／subtype | 論文用來稱有限混合模型分出的疾病類別。[hong2021, p.1] [hong2021, p.2] | [[finite-mixture-subphenotypes]] |
+| 末次觀察值延續 | last observation carried forward（LOCF） | 以最後一次觀察到的值補缺失值；論文用於縱貫資料。[hong2021, p.2] | [[decision-points-and-history]] |

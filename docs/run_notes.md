@@ -8,6 +8,8 @@
 | 2 | renson2025 | 1 | 0 | — | `ingest: renson2025` |
 | 3 | bluemlein2022 | 1 | 0 | ingest agent 先讀了 lint 原始碼才寫，所以一次過；但它也因此發現 lint 的兩個漏洞（見下） | `ingest: bluemlein2022` |
 
+| 4 | hong2021 | 1 | 0 | agent 另寫交叉檢查（含個位數）抓到 1 行出處頁不對（「小於 1」只引 p.8，補 p.4）；Table 1 欄位用加總驗證 | `ingest: hong2021` |
+
 ### lint 本身的錯（第 3 篇 ingest 時發現，已修）
 - **數字黏在中文字旁就不被檢查**：`NUM_RE` 用 `\w` 當邊界，而 Python 把中文字也算 `\w`，
   所以「共8059人」這種寫法完全躲過「數字要有出處」檢查。改成只用 ASCII 邊界，加測試

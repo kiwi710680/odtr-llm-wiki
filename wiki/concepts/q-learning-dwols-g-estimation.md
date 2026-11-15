@@ -1,7 +1,7 @@
 ---
 title: Q 學習、DWOLS 與 G 估計（古典迴歸式方法）
 type: concept
-sources: [bluemlein2022, williams2024]
+sources: [bluemlein2022, williams2024, hong2021]
 updated: 2026-11-15
 ---
 
@@ -35,6 +35,13 @@ updated: 2026-11-15
 
 - 只把 Q-learning 與 A-learning 列為「以條件平均處理效應迴歸為基礎」的一類方法；細節，以及 DWOLS 與 G 估計：本 wiki 的 williams2024 頁未記載。[williams2024, p.3]
 
+### 在 hong2021 中
+
+- 論文以動態加權普通最小平方法（dWOLS，也就是本頁的 DWOLS）依序估計最佳 MP，輸出 0 到 48 小時的個人化最佳劑量策略。[hong2021, p.3]
+- 論文為這一步引用的文獻之一，標題含「最佳劑量策略的倍增穩健估計」；但正文沒有主張自己的估計具有倍增穩健性，也沒有說明傾向分數（連續劑量的指派機制）怎麼建模與加權：來源未提及。[hong2021, p.3] [hong2021, p.9]
+- 函數形式由作者事先指定（哪些變數與 MP 交互、二次項只與類別和 P/F 比值交互），屬於參數式迴歸；bluemlein2022 對這類古典方法的描述是假設函數形式與變數已知。[hong2021, p.3] [bluemlein2022, p.22]
+- hong2021 沒有把 dWOLS 和其他方法比較，也沒有模擬研究：來源未提及。這和 bluemlein2022 把它當作基準方法的用途不同。[hong2021, p.3] [bluemlein2022, p.12]
+
 ## 常見誤解
 
 - 「Q 學習就是深度強化學習」：論文把 Q 學習歸為來自統計學的古典方法（線性迴歸），與另外提到、多以深度學習為基礎的強化學習研究是不同的路線。[bluemlein2022, p.4] [bluemlein2022, p.22]
@@ -48,5 +55,5 @@ updated: 2026-11-15
 - [[doubly-robust-learner]]
 - [[causal-tree-and-forest]]
 - [[optimal-dynamic-treatment-rule]]
-- 來源頁：[[bluemlein2022]]、[[williams2024]]
+- 來源頁：[[bluemlein2022]]、[[williams2024]]、[[hong2021]]
 - 名詞速查：[[glossary]]

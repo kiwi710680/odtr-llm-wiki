@@ -1,7 +1,7 @@
 ---
 title: 後悔值與決策準確度（評估學出的規則）
 type: concept
-sources: [bluemlein2022, williams2024, renson2025]
+sources: [bluemlein2022, williams2024, renson2025, hong2021]
 updated: 2026-11-15
 ---
 
@@ -38,6 +38,14 @@ updated: 2026-11-15
 
 - 沒有新資料與實證結果。[renson2025, p.5]
 
+### 在 hong2021 中
+
+- 這篇沒有真值（oracle），也沒有報告後悔值、決策準確度或期望增益。[hong2021, p.3]
+- 論文的「驗證」：算 ΔMP（實際 MP 減最佳 MP），比較不同 ΔMP 的病人的死亡結局；再用含二次項的邏輯斯迴歸看最低死亡風險是否落在 ΔMP 約為零處。論文的推論是：偏離最佳 MP 的病人死亡風險較高，支持使用 DTR。[hong2021, p.3] [hong2021, p.7]
+- 結果：以 optimal 的 ΔMP 為參照，ΔMP 偏低（OR 1.08；95% CI 1.02 至 1.15）或偏高（OR 1.07；95% CI 1.00 至 1.14）都與住院死亡風險增加有關；含二次項的模型結果相同。[hong2021, p.4]
+- 本 wiki 的觀察（不是論文的話）：兩個勝算比都接近 1，偏高那組的信賴區間下限是 1.00；而且論文沒有說明最佳 MP 與這個驗證用的死亡結局是否取自同一批資料、有沒有分開估計與驗證：來源未提及。[hong2021, p.4]
+- 與 bluemlein2022 的對照：兩篇在真實資料上都沒有與真值比較；bluemlein2022 的期望增益由方法自己估計的處理效應算出，hong2021 用的是實際用量偏離最佳用量與死亡的關聯。[bluemlein2022, p.16] [hong2021, p.3]
+
 ## 常見誤解
 
 - 「準確度高就代表對病人好」：準確度只在模擬資料中對照 oracle；真實資料沒有 oracle。[bluemlein2022, p.16]
@@ -50,5 +58,5 @@ updated: 2026-11-15
 - [[backward-recursion]]
 - [[causal-tree-and-forest]]
 - [[q-learning-dwols-g-estimation]]
-- 來源頁：[[bluemlein2022]]、[[williams2024]]、[[renson2025]]
+- 來源頁：[[bluemlein2022]]、[[williams2024]]、[[renson2025]]、[[hong2021]]
 - 名詞速查：[[glossary]]

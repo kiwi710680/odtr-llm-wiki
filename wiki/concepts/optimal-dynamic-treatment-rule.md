@@ -1,7 +1,7 @@
 ---
 title: 最佳動態治療規則（ODTR）與規則的價值
 type: concept
-sources: [williams2024, bluemlein2022]
+sources: [williams2024, bluemlein2022, hong2021]
 updated: 2026-11-15
 ---
 
@@ -38,6 +38,14 @@ updated: 2026-11-15
 - 論文報告的是上述指標，沒有報告學出規則之價值（平均結局）的估計與信賴區間：來源未提及。
 - 估計 ODTR 的另一類做法（Q 學習等古典迴歸式方法）見 [[q-learning-dwols-g-estimation]]。
 
+### 在 hong2021 中
+
+- 論文要學的最佳規則：在前 48 小時、每 8 小時的各時間點，為每位病人估計最佳的靜態機械功率（MP_static），使最終死亡結局最好；論文只最佳化 MP_static，理由是它與存活的關聯比 MP_dynamic 強。[hong2021, p.2-3]
+- 學出的最佳 MP_static 在三個類別不同：Class 1 為 14.6 ± 9.1，Class 2 為 17.2 ± 8.9，Class 3 為 13.0 ± 8.2；論文印的單位是 ml/cmH2O，與機械功率的單位 Joules/min 不一致，± 後的數字是不是標準差：來源未提及。[hong2021, p.4]
+- 論文把最佳 MP 稱為「目標」：實務上重度肺損傷病人為了氣體交換，未必能降到那個水準；調整到模型選出的水準是否改善結局，論文說尚待驗證。[hong2021, p.8]
+- 論文沒有報告「若人人照最佳規則」的平均結局估計（規則的價值）或其信賴區間：來源未提及。它的檢查方式是比較實際值與最佳值的差距和死亡的關聯，見 [[regret-and-decision-accuracy]]。[hong2021, p.3]
+- 與前面來源的對照（本 wiki 的整理）：williams2024 估計規則價值並給信賴區間，bluemlein2022 在真實資料用期望增益；hong2021 兩者都沒有，只有關聯式的檢查。整理在 [[method-comparison]]。
+
 ## 常見誤解
 
 - 「最佳」是指在族群平均意義上讓反事實結局最好；論文並沒有保證學出的規則一定贏過臨床規則：與 d1 的比較，論文說差異不具意義（RR = 0.93; 95% CI, 0.77-1.13）。[williams2024, p.6]
@@ -52,4 +60,5 @@ updated: 2026-11-15
 - [[doubly-robust-learner]]
 - [[regret-and-decision-accuracy]]
 - [[q-learning-dwols-g-estimation]]
-- 來源頁：[[williams2024]]、[[bluemlein2022]]
+- [[mechanical-power]]
+- 來源頁：[[williams2024]]、[[bluemlein2022]]、[[hong2021]]

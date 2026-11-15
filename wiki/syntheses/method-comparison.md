@@ -1,7 +1,7 @@
 ---
 title: 方法比較：估計式家族與「倍增穩健」的兩種意思
 type: synthesis
-sources: [renson2025, williams2024, bluemlein2022]
+sources: [renson2025, williams2024, bluemlein2022, hong2021]
 updated: 2026-11-15
 ---
 
@@ -65,6 +65,28 @@ updated: 2026-11-15
 - 估計 HTE 的做法：williams2024 以迴歸（例如 ℓ1 正規化）估計 blip，bluemlein2022 以樹或森林估計；兩者都屬資料自適應的方法，但可解釋性的程度不同，見 [[interpretability]]。[williams2024, p.5] [bluemlein2022, p.10]
 - 古典 Q 學習的假設：低維、線性、已知的函數形式；williams2024 與 renson2025 的方法則強調可以搭配彈性的機器學習。[bluemlein2022, p.22] [williams2024, p.4] [renson2025, p.1]
 
+## 加入 hong2021 之後
+
+[[hong2021]] 是臨床應用研究，不是方法論文：它用既有的 dWOLS 估計連續劑量的最佳規則，前面多了一步無監督分類。本節只整理四篇各自說了什麼；臨床情境的並排見 [[dtr-clinical-applications]]。[hong2021, p.1] [hong2021, p.3]
+
+| 面向 | williams2024 | bluemlein2022 | hong2021 |
+|---|---|---|---|
+| 目標 | 教學如何從縱貫資料學最佳規則。[williams2024, p.1] | 提出 DTR-CT 與 DTR-CF 兩個新方法。[bluemlein2022, p.1] | 臨床應用：把個人化通氣策略形式化。[hong2021, p.1] |
+| 治療的型態 | 二元：每週劑量有沒有增加。[williams2024, p.5] | 二元：治療或不治療。[bluemlein2022, p.4] | 連續劑量（機械功率），見 [[mechanical-power]]。[hong2021, p.3] |
+| 估計 blip 的工具 | 倍增穩健的 AIPW 轉換，再迴歸。[williams2024, p.3] | 因果樹或因果森林。[bluemlein2022, p.7] | dWOLS，參數式的 blip，含劑量的一次項與二次項。[hong2021, p.3] |
+| 先分亞型？ | 本 wiki 的 williams2024 頁未記載。 | 樹的葉子是依處理效應分出的群。[bluemlein2022, p.8] | 先以有限混合模型分成三類，再放進模型，見 [[finite-mixture-subphenotypes]]。[hong2021, p.2] [hong2021, p.3] |
+| 資料 | 試驗的 BUP-NX 組。[williams2024, p.5] | 模擬資料與 MIMIC-III。[bluemlein2022, p.1] | MIMIC-IV 單一資料庫。[hong2021, p.2] |
+| 時間點 | 每週。[williams2024, p.2] | 模擬 3 個時間步，真實資料前 10 小時。[bluemlein2022, p.11] [bluemlein2022, p.15] | 每 8 小時，共 7 個時間點。[hong2021, p.2] |
+| 評估學出的規則 | 規則價值的估計與風險比。[williams2024, p.6] | 後悔值、決策準確度、期望增益。[bluemlein2022, p.13] | ΔMP 與死亡的關聯。[hong2021, p.4] |
+| 倍增穩健 | 主張，條件是 Q 或 g 至少一個一致。[williams2024, p.3] | 主張，條件是兩個模型至少一個設定正確。[bluemlein2022, p.10] | 正文沒有主張；引用文獻的標題含倍增穩健。[hong2021, p.3] [hong2021, p.9] |
+
+### 並排觀察
+
+- 「驗證」的意思不同：williams2024 估計規則價值，bluemlein2022 在真實資料看期望增益，hong2021 看實際用量偏離最佳用量與死亡的關聯。三者回答的是不同問題，彼此沒有矛盾。[williams2024, p.6] [bluemlein2022, p.16] [hong2021, p.4]
+- 函數形式：bluemlein2022 說古典線性方法假設函數形式已知而受限；hong2021 用 dWOLS 並由作者指定交互作用項與二次項，沒有與其他方法比較。兩篇的目的不同（比較方法表現，對臨床應用），所以不是互相否定。[bluemlein2022, p.22] [hong2021, p.3]
+- 結論的措辭：hong2021 的結論是最佳 MP 可能有助於改善存活，需要前瞻性試驗檢驗；本 wiki 把它的估計當成關聯，不當成因果。[hong2021, p.1] [hong2021, p.8]
+- 加入 hong2021 之後仍沒有發現互相矛盾的陳述，所以沒有新增 disagreements 條目。
+
 ## 相關頁面
 
 - [[plug-in-and-one-step-estimators]]
@@ -76,4 +98,7 @@ updated: 2026-11-15
 - [[interpretability]]
 - [[regret-and-decision-accuracy]]
 - [[q-learning-dwols-g-estimation]]
+- [[mechanical-power]]
+- [[finite-mixture-subphenotypes]]
+- [[dtr-clinical-applications]]
 - [[glossary]]

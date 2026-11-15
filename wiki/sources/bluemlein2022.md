@@ -114,4 +114,5 @@ updated: 2026-11-15
 - 核心概念頁：[[backward-recursion]]、[[causal-tree-and-forest]]、[[interpretability]]、[[regret-and-decision-accuracy]]、[[q-learning-dwols-g-estimation]]。
 - 延伸的既有概念頁：[[dynamic-treatment-regime]]、[[decision-points-and-history]]、[[optimal-dynamic-treatment-rule]]、[[treatment-effect-heterogeneity]]、[[blip-function]]、[[doubly-robust-learner]]、[[identification-assumptions]]、[[nuisance-functions]]、[[cross-fitting]]、[[rate-double-robustness]]。
 - 與 [[williams2024]] 的對照：兩篇都從最後一個時間點往前估計，但每一步估處理效應的工具不同；與 [[renson2025]] 的對照：倍增穩健的說法。整理在 [[method-comparison]]。
+- 與 [[hong2021]] 的對照：兩篇都用加護病房資料（bluemlein2022 為 MIMIC-III，hong2021 為 MIMIC-IV），也都是估計時間變動的個人化規則；bluemlein2022 的治療是二元，hong2021 的是連續的機械功率劑量，並先用有限混合模型分類。見 [[dtr-clinical-applications]]、[[finite-mixture-subphenotypes]]、[[method-comparison]]。
 - 名詞速查見 [[glossary]]。

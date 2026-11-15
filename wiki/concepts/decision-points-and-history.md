@@ -1,7 +1,7 @@
 ---
 title: 決策時間點與病史（連續決策）
 type: concept
-sources: [williams2024, bluemlein2022]
+sources: [williams2024, bluemlein2022, hong2021]
 updated: 2026-11-15
 ---
 
@@ -38,6 +38,14 @@ updated: 2026-11-15
 - 真實資料取加護病房的前 10 小時病史；模型只用三個時間步的病史，以偵測最多延遲三個時間步的效果。[bluemlein2022, p.15]
 - 論文的限制段落寫「評估兩個時間步」，與上面兩條不一致；原因來源未說明。[bluemlein2022, p.18]
 
+### 在 hong2021 中
+
+- 時間點：從開始機械通氣起每 8 小時蒐集一次時間變動變數，共 48 小時，所以有 7 個時間點（0 到 48 小時）；選 8 小時，是因為多數病人的靜態肺力學平均約每 8 小時量一次。[hong2021, p.2]
+- 同一個 8 小時窗內若有多次測量，取平均；缺失值以末次觀察值延續（LOCF）補，論文說另以 hot deck 法做過敏感度分析，但結果未顯示。[hong2021, p.2]
+- 病人的「狀態」包含有限混合模型分出的類別（見 [[finite-mixture-subphenotypes]]）與生理變數；類別會隨通氣天數改變，論文以此說明為什麼通氣策略要隨時調整。[hong2021, p.7]
+- 從 Class 2 轉到 Class 1 的病人較可能存活到出院；Class 3 在通氣期間維持不變。[hong2021, p.4] [hong2021, p.5]
+- 病史怎麼進入模型（只用當期的值，還是也含過去的治療與前期的值）：來源未提及；論文只列出協變數清單。[hong2021, p.3]
+
 ## 常見誤解
 
 - 「連續決策只是把單一決策重複做很多次」：論文的作法不是各週各自獨立學，而是先學最後一步、再假設最後一步已經最佳，回頭學前一步。[williams2024, p.3]
@@ -49,4 +57,5 @@ updated: 2026-11-15
 - [[optimal-dynamic-treatment-rule]]
 - [[doubly-robust-learner]]
 - [[backward-recursion]]
-- 來源頁：[[williams2024]]、[[bluemlein2022]]
+- [[finite-mixture-subphenotypes]]
+- 來源頁：[[williams2024]]、[[bluemlein2022]]、[[hong2021]]

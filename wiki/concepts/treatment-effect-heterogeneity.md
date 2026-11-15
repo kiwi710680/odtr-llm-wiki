@@ -1,7 +1,7 @@
 ---
 title: 平均效果與處理效應異質性
 type: concept
-sources: [williams2024, bluemlein2022]
+sources: [williams2024, bluemlein2022, hong2021]
 updated: 2026-11-15
 ---
 
@@ -36,6 +36,16 @@ updated: 2026-11-15
 - 作者認為，古典基準假設關係已知、且所有病人由同一組變數決定治療；他們的方法允許「對決策有指示性的變數」因人而異。[bluemlein2022, p.17]
 - 古典線性方法假設同一組共變數對結局預測與對處理效應異質性都重要；實務上兩組可能不同且未知。[bluemlein2022, p.22]
 
+### 在 hong2021 中
+
+- 論文以族群異質性為出發點：單一的通氣數值（例如潮氣量與平台壓的上限）未必對所有 ARF 病人都有益；它舉的例子是有些病人在低潮氣量下會發生嚴重的二氧化碳滯留，有些人因循環衰竭無法耐受高 PEEP。[hong2021, p.1]
+- 作法是先用有限混合模型分出三個類別（見 [[finite-mixture-subphenotypes]]），再看機械功率的效果是否隨類別而變。[hong2021, p.1-2]
+- 結果（觀察性資料的關聯估計）：類別與 MP 有顯著交互作用；MP_static 每增加 5 Joules/min，死亡風險比在 Class 1 最小（1.29；95% CI 1.15 至 1.45），在 Class 3 最大（1.83；95% CI 1.52 至 2.20）。[hong2021, p.1] [hong2021, p.4]
+- 異質性也沿著連續的肺功能指標出現：論文報告了 MP_dynamic 與 P/F 比值、肺順應性的交互作用項，細節見 [[hong2021]]。[hong2021, p.4]
+- 論文對 Class 3 的詮釋：其特徵是通氣下仍頑固的呼吸衰竭、其他器官功能相對正常；在這種情況下，降低 MP 有助於減少潛在的肺損傷。這是作者的詮釋，不是試驗結果。[hong2021, p.6]
+- 用字提醒：摘要寫「MP 對 ARF 的亞型有不同的治療效果」，但文中實際估計的是 Cox 迴歸裡的風險比與交互作用；本 wiki 照估計的字面說明，把它們當成關聯，不當成因果效應。[hong2021, p.1] [hong2021, p.4]
+- 這些交互作用是用風險比的差異呈現，不是 [[blip-function]]（條件平均處理效應）的估計；DTR 那一步的 blip 才把類別放進模型當作會改變效果的變數。[hong2021, p.3]
+
 ## 常見誤解
 
 - 「ATE 為正就代表對每個人都有益」：論文明說不是，見上方定義。[williams2024, p.1]
@@ -47,4 +57,5 @@ updated: 2026-11-15
 - [[optimal-dynamic-treatment-rule]]
 - [[dynamic-treatment-regime]]
 - [[causal-tree-and-forest]]
-- 來源頁：[[williams2024]]、[[bluemlein2022]]
+- [[finite-mixture-subphenotypes]]
+- 來源頁：[[williams2024]]、[[bluemlein2022]]、[[hong2021]]

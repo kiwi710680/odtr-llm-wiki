@@ -8,6 +8,7 @@
 - [[williams2024]] — Williams 等人：從縱貫資料學習最佳動態治療規則（教學型論文，BUP-NX 劑量範例）。
 - [[renson2025]] — Renson 等人：從統計估計目標推導機器學習估計式（EIF、單步估計式、速率倍增穩健）。
 - [[bluemlein2022]] — Blümlein 等人：用因果樹與因果森林學最佳動態治療策略（DTR-CT／DTR-CF，倒推遞迴，模擬與 MIMIC-III 加護病房資料）。
+- [[hong2021]] — Hong 等人：以有限混合模型把急性呼吸衰竭分成三類，再用 DTR 估計個人化機械功率（MIMIC-IV 加護病房資料，臨床應用）。
 
 ## 概念（concepts）
 
@@ -29,10 +30,13 @@
 - [[causal-tree-and-forest]] — 因果樹與因果森林：誠實分割、用樹估計處理效應。
 - [[interpretability]] — 可解釋性：interpretable 與 explainable 的差別。
 - [[regret-and-decision-accuracy]] — 後悔值與決策準確度：模擬與真實資料怎麼評估學出的規則。
+- [[mechanical-power]] — 機械功率（MP）：呼吸器參數合成的一個數字，hong2021 的「劑量」。
+- [[finite-mixture-subphenotypes]] — 有限混合模型與表型：先不看標籤把病人自動分類。
 
 ## 比較與綜合（syntheses）
 
-- [[method-comparison]] — 方法比較：估計式家族，「倍增穩健」的幾種意思，以及三篇在多時間點、可解釋性、評估方式上的對照。
+- [[method-comparison]] — 方法比較：估計式家族，「倍增穩健」的幾種意思，以及三篇在多時間點、可解釋性、評估方式上的對照；文末加入 hong2021 後的四篇對照。
+- [[dtr-clinical-applications]] — DTR 的臨床應用：三個情境（藥物劑量、ICU 開關式處置、連續劑量）並排，以及怎麼檢查規則。
 
 ## 術語表
 
