@@ -1,7 +1,7 @@
 ---
 title: 因果識別的前提假設
 type: concept
-sources: [williams2024, renson2025, bluemlein2022, hong2021]
+sources: [williams2024, renson2025, bluemlein2022, hong2021, desman2025]
 updated: 2026-11-15
 ---
 
@@ -64,6 +64,14 @@ updated: 2026-11-15
 - 實際 MP 為何因人而異（誰決定、依什麼調整）：來源未提及；最佳 MP 是否落在資料中真有人使用過的範圍：來源未提及。
 - 除了 hot deck 對補值的敏感度分析（結果未顯示）外，沒有看到對未測量干擾的敏感度分析：來源未提及。[hong2021, p.2]
 
+### 在 desman2025 中
+
+- 論文沒有列出或討論一致性、正值性、可交換性，也沒有討論未測量干擾：來源未提及。
+- 資料是回溯性的觀察資料：醫師依醫院流程與個人經驗給胰島素，並不是隨機分派。[desman2025, p.1] [desman2025, p.7]
+- 本 wiki 的對照（不是論文的話）：williams2024 說所有規則都必須在資料中有支持；desman2025 的 CQL 懲罰資料分布之外的行動，避免在資料覆蓋不足處高估，每小時 10 單位的上限也是類似的防線。這處理的是「資料裡沒人做過」的問題，但論文沒有使用正值性這個詞：來源未提及。見 [[offline-reinforcement-learning]]。[williams2024, p.3] [desman2025, p.8] [desman2025, p.9]
+- 論文做的穩健性檢查：以外部驗證資料（eICU-CRD）重做評估，並比較被排除病人的建議分布；兩者都不是對因果假設的檢查。[desman2025, p.2] [desman2025, p.6]
+- 補值（前一個值往後填、再用 k 近鄰法）的敏感度分析：來源未提及。[desman2025, p.8]
+
 ## 常見誤解
 
 - 「資料來自隨機試驗，所以所有假設自動成立」：論文的 BUP-NX 組內，劑量調整是依臨床判斷，而不是隨機分派，所以仍以干擾因子調整。[williams2024, p.5]
@@ -77,4 +85,6 @@ updated: 2026-11-15
 - [[statistical-estimand]]
 - [[rate-double-robustness]]
 - [[backward-recursion]]
-- 來源頁：[[williams2024]]、[[renson2025]]、[[bluemlein2022]]、[[hong2021]]
+- [[offline-reinforcement-learning]]
+- [[off-policy-evaluation]]
+- 來源頁：[[williams2024]]、[[renson2025]]、[[bluemlein2022]]、[[hong2021]]、[[desman2025]]

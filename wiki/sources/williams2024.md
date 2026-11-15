@@ -74,3 +74,4 @@ updated: 2026-11-15
 - 名詞速查見 [[glossary]]。
 - 和 [[renson2025]] 的關係：兩篇都用到倍增穩健與交叉擬合，用法的異同整理在 [[method-comparison]]。
 - 和 [[bluemlein2022]] 的關係：兩篇都從最後一個時間點往前估計（見 [[backward-recursion]]），但每一步估計處理效應的工具不同（倍增穩健轉換再迴歸，對照因果樹與因果森林，見 [[causal-tree-and-forest]]）；整理在 [[method-comparison]]。
+- 和 [[desman2025]] 的關係：desman2025 也學時間變動的個人化劑量規則，但用強化學習而不是 blip 函數；本 wiki 的對照：它的離線策略評估與本篇估計規則價值回答類似的問題，整理在 [[off-policy-evaluation]] 與 [[method-comparison]]。

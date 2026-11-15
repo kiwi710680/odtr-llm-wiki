@@ -73,3 +73,4 @@ updated: 2026-11-15
 - 與 [[bluemlein2022]] 的對照：bluemlein2022 也宣稱倍增穩健，但談的是無偏性層面，沒有討論收斂速率；見 [[method-comparison]]、[[rate-double-robustness]]。
 - 與 [[hong2021]] 的關係：hong2021 是臨床應用，沒有推導估計式；它是否使用交叉擬合、有效影響函數或速率倍增穩健：來源未提及。整理在 [[method-comparison]]。
 - 名詞速查見 [[glossary]]。
+- 與 [[desman2025]] 的關係：desman2025 是臨床應用，沒有推導估計式；它是否使用交叉擬合、有效影響函數或速率倍增穩健：來源未提及。整理在 [[method-comparison]]。

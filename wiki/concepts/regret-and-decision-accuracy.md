@@ -1,7 +1,7 @@
 ---
 title: 後悔值與決策準確度（評估學出的規則）
 type: concept
-sources: [bluemlein2022, williams2024, renson2025, hong2021]
+sources: [bluemlein2022, williams2024, renson2025, hong2021, desman2025]
 updated: 2026-11-15
 ---
 
@@ -46,6 +46,14 @@ updated: 2026-11-15
 - 本 wiki 的觀察（不是論文的話）：兩個勝算比都接近 1，偏高那組的信賴區間下限是 1.00；而且論文沒有說明最佳 MP 與這個驗證用的死亡結局是否取自同一批資料、有沒有分開估計與驗證：來源未提及。[hong2021, p.4]
 - 與 bluemlein2022 的對照：兩篇在真實資料上都沒有與真值比較；bluemlein2022 的期望增益由方法自己估計的處理效應算出，hong2021 用的是實際用量偏離最佳用量與死亡的關聯。[bluemlein2022, p.16] [hong2021, p.3]
 
+### 在 desman2025 中
+
+- 這篇沒有真值（oracle），也沒有報告後悔值、決策準確度或期望增益：來源未提及。
+- 論文用四種檢查：（一）離線策略評估的估計報酬對照醫師，見 [[off-policy-evaluation]]；（二）血糖在範圍內的時間比例，如何隨「模型建議減實際給藥」的差距而變；（三）與內分泌科醫師建議的平均絕對誤差；（四）盲評的 5 分 Likert 量表。[desman2025, p.2] [desman2025, p.5] [desman2025, p.6]
+- 與 bluemlein2022 的期望增益對照（本 wiki 的整理）：因為沒有真值，兩篇都是拿「學出的策略的估計結果」去比「實際做法」；差別是 desman2025 的醫師報酬是觀察到的、GLUCOSE 的報酬是估計出來的，而且另有外部驗證資料。[bluemlein2022, p.16] [desman2025, p.2]
+- 與 hong2021 的對照：兩篇都看「實際用量離建議多遠」與結果的關係；hong2021 看 ΔMP 與死亡，desman2025 看劑量差距與血糖在範圍內的時間比例。[hong2021, p.4] [desman2025, p.2]
+- 論文自己的措辭是：讓給藥更接近模型建議「可能」提高血糖在範圍內的時間比例；這個關聯是觀察性的。[desman2025, p.7]
+
 ## 常見誤解
 
 - 「準確度高就代表對病人好」：準確度只在模擬資料中對照 oracle；真實資料沒有 oracle。[bluemlein2022, p.16]
@@ -58,5 +66,6 @@ updated: 2026-11-15
 - [[backward-recursion]]
 - [[causal-tree-and-forest]]
 - [[q-learning-dwols-g-estimation]]
-- 來源頁：[[bluemlein2022]]、[[williams2024]]、[[renson2025]]、[[hong2021]]
+- [[off-policy-evaluation]]
+- 來源頁：[[bluemlein2022]]、[[williams2024]]、[[renson2025]]、[[hong2021]]、[[desman2025]]
 - 名詞速查：[[glossary]]

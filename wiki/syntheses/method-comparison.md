@@ -1,7 +1,7 @@
 ---
 title: 方法比較：估計式家族與「倍增穩健」的兩種意思
 type: synthesis
-sources: [renson2025, williams2024, bluemlein2022, hong2021]
+sources: [renson2025, williams2024, bluemlein2022, hong2021, desman2025]
 updated: 2026-11-15
 ---
 
@@ -87,6 +87,28 @@ updated: 2026-11-15
 - 結論的措辭：hong2021 的結論是最佳 MP 可能有助於改善存活，需要前瞻性試驗檢驗；本 wiki 把它的估計當成關聯，不當成因果。[hong2021, p.1] [hong2021, p.8]
 - 加入 hong2021 之後仍沒有發現互相矛盾的陳述，所以沒有新增 disagreements 條目。
 
+## 加入 desman2025 之後
+
+[[desman2025]] 是臨床應用研究，但用的是強化學習這條路線：保守 Q 學習加分布式的部分，不是前四篇的迴歸式、樹式或估計式推導。本節只整理它與其他篇各自說了什麼；整體導覽見 [[overview-for-beginners]]。[desman2025, p.1] [desman2025, p.9]
+
+| 面向 | desman2025 | 對照的來源怎麼說 |
+|---|---|---|
+| 目標 | 建一個建議每小時胰島素劑量的演算法。[desman2025, p.1] | hong2021：把個人化通氣策略形式化。[hong2021, p.1] |
+| 治療的型態 | 連續劑量，每小時的胰島素量。[desman2025, p.9] | hong2021：連續劑量（機械功率）；bluemlein2022：二元。[hong2021, p.3] [bluemlein2022, p.4] |
+| 時間點 | 每小時，只用前 24 小時。[desman2025, p.8] | hong2021：每 8 小時，共 7 個時間點；bluemlein2022：真實資料前 10 小時。[hong2021, p.2] [bluemlein2022, p.15] |
+| 估計規則的工具 | 保守 Q 學習加隱含分位數網路，三層隱藏層的神經網路。[desman2025, p.9] | hong2021：dWOLS；bluemlein2022：因果樹或因果森林。[hong2021, p.3] [bluemlein2022, p.7] |
+| 時間結構的處理 | 馬可夫決策過程加折扣因子，見 [[reinforcement-learning-mdp]]；倒推遞迴：來源未提及。[desman2025, p.9] | bluemlein2022：倒推遞迴與偽結局，見 [[backward-recursion]]。[bluemlein2022, p.7] |
+| 評估學出的規則 | 離線策略評估、血糖在範圍內的時間比例、與內分泌科醫師的平均絕對誤差、盲評；見 [[off-policy-evaluation]]。[desman2025, p.2] [desman2025, p.5] [desman2025, p.6] | hong2021：ΔMP 與死亡的關聯；bluemlein2022：後悔值、決策準確度、期望增益。[hong2021, p.4] [bluemlein2022, p.13] |
+| 外部資料驗證 | eICU-CRD。[desman2025, p.2] | 前三篇：來源未提及，見 [[dtr-clinical-applications]]。 |
+| 倍增穩健、有效影響函數 | 來源未提及。 | williams2024、bluemlein2022 主張倍增穩健；renson2025 推導相關估計式。[williams2024, p.3] [bluemlein2022, p.10] [renson2025, p.1] |
+
+### 並排觀察
+
+- 「Q 學習」同名但不同脈絡：desman2025 的保守 Q 學習屬於離線強化學習；bluemlein2022 的 Q 學習是來自統計學的線性迴歸式方法。論文沒有說明兩者的關係：來源未提及。見 [[q-learning-dwols-g-estimation]]。[desman2025, p.8] [bluemlein2022, p.22]
+- 「驗證」的意思不同：desman2025 是離線估計的報酬加專家評估，hong2021 是偏離最佳用量與死亡的關聯，williams2024 是規則價值的估計。三者回答不同的問題，彼此沒有矛盾。[desman2025, p.2] [hong2021, p.4] [williams2024, p.6]
+- 可解釋性：bluemlein2022 說強化學習多為深度學習、不易解釋；desman2025 用的是神經網路加事後的 SHAP 說明，兩者談的是不同層次（路線的一般特徵、對一個模型的事後說明），不是互相否定。見 [[interpretability]]。[bluemlein2022, p.2] [desman2025, p.10]
+- 加入 desman2025 之後仍沒有發現互相矛盾的陳述，所以沒有新增 disagreements 條目。
+
 ## 相關頁面
 
 - [[plug-in-and-one-step-estimators]]
@@ -101,4 +123,10 @@ updated: 2026-11-15
 - [[mechanical-power]]
 - [[finite-mixture-subphenotypes]]
 - [[dtr-clinical-applications]]
+- [[reinforcement-learning-mdp]]
+- [[offline-reinforcement-learning]]
+- [[distributional-reinforcement-learning]]
+- [[off-policy-evaluation]]
+- [[overview-for-beginners]]
+
 - [[glossary]]

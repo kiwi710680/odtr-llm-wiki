@@ -1,7 +1,7 @@
 ---
 title: DTR 的臨床應用：三個情境並排
 type: synthesis
-sources: [williams2024, bluemlein2022, hong2021]
+sources: [williams2024, bluemlein2022, hong2021, desman2025]
 updated: 2026-11-15
 ---
 
@@ -37,11 +37,33 @@ updated: 2026-11-15
 - 說明一個規則時，先講它輸出的是什麼（開關或劑量），再講它依據哪些資訊，最後講怎麼檢查。
 - hong2021 的圖與部分係數只在原圖中，本 wiki 沒有；簡報若要畫圖，不能憑空補數字。[hong2021, p.5]
 
+## 加入 desman2025 之後
+
+[[desman2025]] 是第四個臨床情境：心臟手術後第一天的胰島素劑量，用的是強化學習，而不是本頁前三篇的迴歸式或樹式方法。本節只整理它的情境，不評斷誰對。[desman2025, p.1] [desman2025, p.9]
+
+| 面向 | desman2025 |
+|---|---|
+| 臨床問題 | 心臟手術後第一天，每小時要給多少常規胰島素。[desman2025, p.1] |
+| 治療的型態 | 連續劑量：每小時的胰島素量，四捨五入到整數，上限為每小時 10 單位。[desman2025, p.9] |
+| 結局 | 血糖落在 70 至 180 mg/dL 的「適當控制」；訓練時用依血糖範圍計分的獎勵。[desman2025, p.8] [desman2025, p.9] |
+| 資料 | 開發用 MIMIC-IV 的 6,148 位，外部驗證用 eICU-CRD 的 649 位。[desman2025, p.2] |
+| 決策時間點 | 每小時，只用前 24 小時。[desman2025, p.8] |
+| 規則怎麼學 | 保守 Q 學習加隱含分位數網路，見 [[offline-reinforcement-learning]]、[[distributional-reinforcement-learning]]。[desman2025, p.9] |
+| 怎麼判斷規則好不好 | 離線策略評估的估計報酬對照醫師、血糖在範圍內的時間比例與劑量差距、與內分泌科醫師建議的平均絕對誤差、盲評的 Likert 量表；見 [[off-policy-evaluation]]。[desman2025, p.2] [desman2025, p.5] [desman2025, p.6] |
+
+### 加入第四篇後的觀察
+
+- 外部資料驗證：本頁前面說前三篇都來源未提及；desman2025 是例外，它用 eICU-CRD 做外部驗證，另比較被排除病人的建議分布。[desman2025, p.2] [desman2025, p.6]
+- 人類專家評估：desman2025 請內分泌科醫師、加護醫師與專科護理師給建議，並由另外兩位資深加護醫師盲評；本 wiki 的前三篇來源頁沒有記載這類評估。[desman2025, p.3] [desman2025, p.5] [desman2025, p.6]
+- 與 hong2021 最接近：兩者都是加護病房資料、連續劑量、時間變動的規則，也都看「實際用量離建議多遠」與結果的關係；hong2021 看 ΔMP 與死亡，desman2025 看劑量差距與血糖在範圍內的時間比例。[hong2021, p.4] [desman2025, p.2]
+- 「驗證」仍不是隨機試驗的結果：論文自己說這是回溯性研究，需要前瞻性研究與臨床試驗。[desman2025, p.7]
+- 措辭建議（本 wiki 的整理）：說「離線估計的報酬較高」「與內分泌科醫師的建議較接近」，不說「證明減少低血糖」。論文結論有「在真實世界展現有效性」這類字眼，但資料是回溯性的，本 wiki 不把它升級為臨床效果。[desman2025, p.8]
+
 ## 相關頁面
 
 - [[method-comparison]]
 - [[dynamic-treatment-regime]]
 - [[optimal-dynamic-treatment-rule]]
 - [[treatment-effect-heterogeneity]]
-- 來源頁：[[williams2024]]、[[bluemlein2022]]、[[hong2021]]
+- 來源頁：[[williams2024]]、[[bluemlein2022]]、[[hong2021]]、[[desman2025]]
 - 名詞速查：[[glossary]]

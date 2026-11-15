@@ -1,7 +1,7 @@
 ---
 title: Q 學習、DWOLS 與 G 估計（古典迴歸式方法）
 type: concept
-sources: [bluemlein2022, williams2024, hong2021]
+sources: [bluemlein2022, williams2024, hong2021, desman2025]
 updated: 2026-11-15
 ---
 
@@ -42,6 +42,12 @@ updated: 2026-11-15
 - 函數形式由作者事先指定（哪些變數與 MP 交互、二次項只與類別和 P/F 比值交互），屬於參數式迴歸；bluemlein2022 對這類古典方法的描述是假設函數形式與變數已知。[hong2021, p.3] [bluemlein2022, p.22]
 - hong2021 沒有把 dWOLS 和其他方法比較，也沒有模擬研究：來源未提及。這和 bluemlein2022 把它當作基準方法的用途不同。[hong2021, p.3] [bluemlein2022, p.12]
 
+### 在 desman2025 中
+
+- 論文用的演算法叫保守 Q 學習（CQL），是離線強化學習的方法，見 [[offline-reinforcement-learning]]。[desman2025, p.8]
+- CQL 與本頁的 Q 學習（以線性迴歸估計 blip 參數）是不是同一脈絡：論文沒有說明：來源未提及。bluemlein2022 把 Q 學習歸為統計學的古典線性方法，與強化學習是不同的路線。[bluemlein2022, p.4] [bluemlein2022, p.22]
+- desman2025 沒有使用 DWOLS 或 G 估計：來源未提及。
+
 ## 常見誤解
 
 - 「Q 學習就是深度強化學習」：論文把 Q 學習歸為來自統計學的古典方法（線性迴歸），與另外提到、多以深度學習為基礎的強化學習研究是不同的路線。[bluemlein2022, p.4] [bluemlein2022, p.22]
@@ -55,5 +61,6 @@ updated: 2026-11-15
 - [[doubly-robust-learner]]
 - [[causal-tree-and-forest]]
 - [[optimal-dynamic-treatment-rule]]
-- 來源頁：[[bluemlein2022]]、[[williams2024]]、[[hong2021]]
+- [[offline-reinforcement-learning]]
+- 來源頁：[[bluemlein2022]]、[[williams2024]]、[[hong2021]]、[[desman2025]]
 - 名詞速查：[[glossary]]

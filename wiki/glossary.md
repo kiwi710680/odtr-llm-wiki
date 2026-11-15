@@ -1,13 +1,13 @@
 ---
 title: 術語表
 type: glossary
-sources: [williams2024, renson2025, bluemlein2022, hong2021]
+sources: [williams2024, renson2025, bluemlein2022, hong2021, desman2025]
 updated: 2026-11-15
 ---
 
 # 術語表
 
-每列：中文 ／ English ／ 一句話定義 ／ 詳見頁面。定義只依據已 ingest 的來源；目前來源：[[williams2024]]、[[renson2025]]、[[bluemlein2022]]、[[hong2021]]。
+每列：中文 ／ English ／ 一句話定義 ／ 詳見頁面。定義只依據已 ingest 的來源；目前來源：[[williams2024]]、[[renson2025]]、[[bluemlein2022]]、[[hong2021]]、[[desman2025]]。
 
 | 中文 | English | 一句話定義 | 詳見 |
 |---|---|---|---|
@@ -75,3 +75,19 @@ updated: 2026-11-15
 | 潛在剖面分析 | latent profile analysis（LPA） | 有限混合模型的別名。[hong2021, p.2] | [[finite-mixture-subphenotypes]] |
 | 表型／亞型 | phenotype／subtype | 論文用來稱有限混合模型分出的疾病類別。[hong2021, p.1] [hong2021, p.2] | [[finite-mixture-subphenotypes]] |
 | 末次觀察值延續 | last observation carried forward（LOCF） | 以最後一次觀察到的值補缺失值；論文用於縱貫資料。[hong2021, p.2] | [[decision-points-and-history]] |
+| 強化學習 | reinforcement learning（RL） | 代理在環境中採取行動，以最大化累積獎勵來學習做決策。[desman2025, p.2] | [[reinforcement-learning-mdp]] |
+| 馬可夫決策過程 | Markov Decision Process（MDP） | 把 RL 問題寫成每個時間步的狀態、行動、獎勵與下一個狀態。[desman2025, p.9] | [[reinforcement-learning-mdp]] |
+| 狀態／行動／獎勵 | state／action／reward | 這篇中分別是：每小時的病人特徵／每小時的胰島素劑量／依血糖範圍計分的回饋。[desman2025, p.9] | [[reinforcement-learning-mdp]] |
+| 折扣因子 | discount factor | 決定遠期獎勵比近期少算多少；論文設為 0.67，約 3 小時的有效視野。[desman2025, p.9] | [[reinforcement-learning-mdp]] |
+| 策略 | policy | 代理依狀態選行動的做法，隨訓練改進；本 wiki 對照為「規則」。[desman2025, p.2] | [[reinforcement-learning-mdp]]、[[dynamic-treatment-regime]] |
+| 離線強化學習 | offline RL | 代理從固定的資料集學習，不再與環境互動。[desman2025, p.2] | [[offline-reinforcement-learning]] |
+| 保守 Q 學習 | conservative Q learning（CQL） | 離線 RL 演算法，對學到的策略正則化，減輕在資料覆蓋不足處的高估。[desman2025, p.8] | [[offline-reinforcement-learning]] |
+| 分布式強化學習 | distributional RL | 刻畫可能結果的整個分布，而不只是期望獎勵。[desman2025, p.2] | [[distributional-reinforcement-learning]] |
+| 隱含分位數網路 | Implicit Quantile Networks（IQN） | 訓練時從連續的分位數值取樣，彈性地學出完整的報酬分布。[desman2025, p.9] | [[distributional-reinforcement-learning]] |
+| 離線策略評估 | off-policy evaluation（OPE） | 從既有資料估計學到的策略的表現，不實際施行。[desman2025, p.9] | [[off-policy-evaluation]] |
+| 擬合 Q 評估 | fitted Q evaluation（FQE） | 論文採用的 OPE 方法。[desman2025, p.9] | [[off-policy-evaluation]] |
+| 血糖在範圍內時間 | time in range（TIR） | 血糖落在 70 至 180 mg/dL 的時間比例。[desman2025, p.2] | [[desman2025]] |
+| 平均絕對誤差 | mean absolute error（MAE） | 各組建議劑量與內分泌科醫師建議之差的絕對值平均；論文用它衡量與專家的接近程度。[desman2025, p.10] | [[desman2025]] |
+| 排列式 SHAP | Permutation SHAP | 以合作賽局理論為基礎、與模型無關的方法，估計各特徵對模型預測的貢獻。[desman2025, p.10] | [[interpretability]] |
+| 階梯式胰島素 | sliding scale insulin | 反應式、非個人化的劑量：同一個血糖給同一個劑量。[desman2025, p.2] | [[desman2025]] |
+| 醫師在迴路中 | physician-in-the-loop | 需要較高劑量的情況仍須由醫師參與。[desman2025, p.9] | [[offline-reinforcement-learning]] |

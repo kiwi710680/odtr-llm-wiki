@@ -1,7 +1,7 @@
 ---
 title: 決策時間點與病史（連續決策）
 type: concept
-sources: [williams2024, bluemlein2022, hong2021]
+sources: [williams2024, bluemlein2022, hong2021, desman2025]
 updated: 2026-11-15
 ---
 
@@ -46,6 +46,14 @@ updated: 2026-11-15
 - 從 Class 2 轉到 Class 1 的病人較可能存活到出院；Class 3 在通氣期間維持不變。[hong2021, p.4] [hong2021, p.5]
 - 病史怎麼進入模型（只用當期的值，還是也含過去的治療與前期的值）：來源未提及；論文只列出協變數清單。[hong2021, p.3]
 
+### 在 desman2025 中
+
+- 時間點：每小時一個決策點；只用每位病人手術後前 24 小時的資料，時間步從 ICU 入院後第一次血糖測量開始記。[desman2025, p.8]
+- 病史怎麼進入：以「狀態」表示，包含當下的特徵、前四小時的血糖、這段期間的血糖變化，以及血糖變化與胰島素劑量的比值，而不是整段病史。[desman2025, p.9]
+- 缺失值：先以前一個值往後填，再以 k 近鄰法（k = 5）補。[desman2025, p.8]
+- 視野：折扣因子設為 0.67，相當於約 3 小時的有效視野；論文說這是為了讓策略跟得上快速變化的血糖。[desman2025, p.9]
+- 資訊限制：GLUCOSE 只能用到目前時間點為止的資料，人類評估者則看得到整段時間序列。本 wiki 的對照（不是論文的話）：這與本頁「病史只含剛好在治療之前的資訊」的定義一致。[desman2025, p.5] [desman2025, p.7] [williams2024, p.3]
+
 ## 常見誤解
 
 - 「連續決策只是把單一決策重複做很多次」：論文的作法不是各週各自獨立學，而是先學最後一步、再假設最後一步已經最佳，回頭學前一步。[williams2024, p.3]
@@ -58,4 +66,5 @@ updated: 2026-11-15
 - [[doubly-robust-learner]]
 - [[backward-recursion]]
 - [[finite-mixture-subphenotypes]]
-- 來源頁：[[williams2024]]、[[bluemlein2022]]、[[hong2021]]
+- [[reinforcement-learning-mdp]]
+- 來源頁：[[williams2024]]、[[bluemlein2022]]、[[hong2021]]、[[desman2025]]

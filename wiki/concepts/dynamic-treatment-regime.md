@@ -1,7 +1,7 @@
 ---
 title: 動態治療策略（靜態與動態規則）
 type: concept
-sources: [williams2024, bluemlein2022, hong2021]
+sources: [williams2024, bluemlein2022, hong2021, desman2025]
 updated: 2026-11-15
 ---
 
@@ -50,6 +50,13 @@ updated: 2026-11-15
 - 本 wiki 的對照（不是論文的話）：論文批評的「全體病人共用同一個上限」，大致對應本 wiki 的「靜態規則」；論文自己沒有使用「靜態規則」這個詞。
 - 規則的具體形式（例如各係數的數值或流程圖）：正文未列出，來源未提及。[hong2021, p.3]
 
+### 在 desman2025 中
+
+- 論文沒有使用「動態治療策略」或 DTR 這些詞：來源未提及。它用強化學習的語言：學出依病人個別血糖波動調整、使累積獎勵最大的最佳胰島素劑量策略。[desman2025, p.2]
+- 規則的輸出是連續的劑量：每小時的常規胰島素量，四捨五入到整數，上限為每小時 10 單位。[desman2025, p.9]
+- 論文拿來對照的是階梯式劑量：同一個血糖給同一個劑量，不看病人個別條件。本 wiki 的對照（不是論文的話）：這相當於一條只看一個變數的簡單規則；GLUCOSE 則每小時評估超過 70 個特徵。[desman2025, p.2] [desman2025, p.7]
+- 規則由三層隱藏層的神經網路表示；可以直接閱讀的公式或流程圖：來源未提及。[desman2025, p.9]
+
 ## 常見誤解
 
 - 「劑量會隨時間增加就是動態」不一定：情境 2 每個人的劑量安排完全相同，論文仍把它歸為靜態。[williams2024, p.2]
@@ -62,5 +69,6 @@ updated: 2026-11-15
 - [[treatment-effect-heterogeneity]]
 - [[interpretability]]
 - [[mechanical-power]]
-- 來源頁：[[williams2024]]、[[bluemlein2022]]、[[hong2021]]
+- [[reinforcement-learning-mdp]]
+- 來源頁：[[williams2024]]、[[bluemlein2022]]、[[hong2021]]、[[desman2025]]
 - 名詞速查：[[glossary]]

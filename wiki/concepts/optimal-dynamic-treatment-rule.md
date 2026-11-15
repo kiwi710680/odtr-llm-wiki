@@ -1,7 +1,7 @@
 ---
 title: 最佳動態治療規則（ODTR）與規則的價值
 type: concept
-sources: [williams2024, bluemlein2022, hong2021]
+sources: [williams2024, bluemlein2022, hong2021, desman2025]
 updated: 2026-11-15
 ---
 
@@ -46,6 +46,14 @@ updated: 2026-11-15
 - 論文沒有報告「若人人照最佳規則」的平均結局估計（規則的價值）或其信賴區間：來源未提及。它的檢查方式是比較實際值與最佳值的差距和死亡的關聯，見 [[regret-and-decision-accuracy]]。[hong2021, p.3]
 - 與前面來源的對照（本 wiki 的整理）：williams2024 估計規則價值並給信賴區間，bluemlein2022 在真實資料用期望增益；hong2021 兩者都沒有，只有關聯式的檢查。整理在 [[method-comparison]]。
 
+### 在 desman2025 中
+
+- 論文要學的最佳策略：讓累積獎勵最大的每小時胰島素劑量策略；共訓練 200 個模型，挑出在內部測試集上、估計報酬 95% 信賴區間下界最高的一個。[desman2025, p.2] [desman2025, p.9]
+- 規則的「價值」：論文用離線策略評估來估計，見 [[off-policy-evaluation]]。GLUCOSE 的估計報酬在內部測試為 0.0（−0.07 至 0.06）、外部驗證為 −0.63（−0.74 至 −0.52）；醫師的報酬為 −1.29（−1.37 至 −1.20）與 −1.02（−1.16 至 −0.89）。[desman2025, p.2]
+- 論文沒有使用「ODTR」「規則的價值」這些詞：來源未提及。本 wiki 的對照（不是論文的話）：估計報酬相當於規則的價值，但報酬是作者自訂的尺度（最高 +0.2、最低 −1），不是結局的原始單位。[desman2025, p.9]
+- 論文用「顯著改善」「優於醫師」等字眼，但那是對自己建議的離線估計；論文自己說需要前瞻性研究與臨床試驗驗證。[desman2025, p.2] [desman2025, p.7]
+- 與 williams2024 的對照：兩者都估計「依這條規則做」的平均表現並給信賴區間；williams2024 用倍增穩健的估計，desman2025 用擬合 Q 評估，論文沒有把兩者並論。[williams2024, p.6] [desman2025, p.9]
+
 ## 常見誤解
 
 - 「最佳」是指在族群平均意義上讓反事實結局最好；論文並沒有保證學出的規則一定贏過臨床規則：與 d1 的比較，論文說差異不具意義（RR = 0.93; 95% CI, 0.77-1.13）。[williams2024, p.6]
@@ -61,4 +69,5 @@ updated: 2026-11-15
 - [[regret-and-decision-accuracy]]
 - [[q-learning-dwols-g-estimation]]
 - [[mechanical-power]]
-- 來源頁：[[williams2024]]、[[bluemlein2022]]、[[hong2021]]
+- [[off-policy-evaluation]]
+- 來源頁：[[williams2024]]、[[bluemlein2022]]、[[hong2021]]、[[desman2025]]

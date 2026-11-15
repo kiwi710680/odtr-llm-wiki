@@ -1,7 +1,7 @@
 ---
 title: 可解釋性（interpretable 與 explainable）
 type: concept
-sources: [bluemlein2022, williams2024]
+sources: [bluemlein2022, williams2024, desman2025]
 updated: 2026-11-15
 ---
 
@@ -37,6 +37,15 @@ updated: 2026-11-15
 
 - 來源未提及可解釋性。
 
+### 在 desman2025 中
+
+- 論文用 SHAP（具體是排列式 SHAP）事後估計各特徵對模型輸出的貢獻，目的是了解模型的表徵、確保臨床可解釋性。[desman2025, p.3] [desman2025, p.10]
+- 結果：近期與歷史血糖最重要，其次是病人嚴重度的指標（機械通氣、SOFA 分數、Elixhauser 共病指數、手術類型）；論文說這與臨床直覺相符，顯示模型使用臨床相關的資訊。[desman2025, p.3]
+- 另一個為了可讀性的設計：建議劑量四捨五入到整數。[desman2025, p.9]
+- 本 wiki 的對照（不是論文的話）：照 bluemlein2022 的用詞，靠事後方法提供洞察屬於 explainable，決策邏輯本身透明才是 interpretable；GLUCOSE 是神經網路加 SHAP，屬於前者。論文自己沒有做這個區分：來源未提及。[bluemlein2022, p.2] [desman2025, p.9]
+- bluemlein2022 說強化學習多以深度學習為基礎、不易解釋；desman2025 走的是這條路線，並以 SHAP 補充說明。[bluemlein2022, p.2] [bluemlein2022, p.4] [desman2025, p.10]
+- SHAP 圖（補充圖）的數值不在文字中：來源未提及。
+
 ## 常見誤解
 
 - 「可說明就等於可詮釋」：論文自己的用詞把兩者分開，DTR-CF 只算可說明。[bluemlein2022, p.2]
@@ -49,5 +58,6 @@ updated: 2026-11-15
 - [[treatment-effect-heterogeneity]]
 - [[dynamic-treatment-regime]]
 - [[blip-function]]
-- 來源頁：[[bluemlein2022]]、[[williams2024]]
+- [[reinforcement-learning-mdp]]
+- 來源頁：[[bluemlein2022]]、[[williams2024]]、[[desman2025]]
 - 名詞速查：[[glossary]]

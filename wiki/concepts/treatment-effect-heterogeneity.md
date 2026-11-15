@@ -1,7 +1,7 @@
 ---
 title: 平均效果與處理效應異質性
 type: concept
-sources: [williams2024, bluemlein2022, hong2021]
+sources: [williams2024, bluemlein2022, hong2021, desman2025]
 updated: 2026-11-15
 ---
 
@@ -46,6 +46,13 @@ updated: 2026-11-15
 - 用字提醒：摘要寫「MP 對 ARF 的亞型有不同的治療效果」，但文中實際估計的是 Cox 迴歸裡的風險比與交互作用；本 wiki 照估計的字面說明，把它們當成關聯，不當成因果效應。[hong2021, p.1] [hong2021, p.4]
 - 這些交互作用是用風險比的差異呈現，不是 [[blip-function]]（條件平均處理效應）的估計；DTR 那一步的 blip 才把類別放進模型當作會改變效果的變數。[hong2021, p.3]
 
+### 在 desman2025 中
+
+- 論文的出發點：流程化的方案常常沒有考慮病人間的個別差異；有些方案對某些病人較合適，或只在一段時間內有效，因為病情會演變。[desman2025, p.2]
+- 論文沒有估計條件平均處理效應（blip）或處理效應異質性本身：來源未提及。
+- 亞群檢查：依性別、種族、糖尿病狀態分層，各亞群中血糖在範圍內的時間比例都是在建議與實際給藥相符時最高；論文據此說模型在這些亞群表現一致。這是一致性的檢查，不是估計各亞群效果的差異。[desman2025, p.3]
+- 另一種「個體差異」：外表相似的病人，生理反應仍可能差很多；分布式強化學習用來處理這種不確定性，見 [[distributional-reinforcement-learning]]。[desman2025, p.7]
+
 ## 常見誤解
 
 - 「ATE 為正就代表對每個人都有益」：論文明說不是，見上方定義。[williams2024, p.1]
@@ -58,4 +65,5 @@ updated: 2026-11-15
 - [[dynamic-treatment-regime]]
 - [[causal-tree-and-forest]]
 - [[finite-mixture-subphenotypes]]
-- 來源頁：[[williams2024]]、[[bluemlein2022]]、[[hong2021]]
+- [[distributional-reinforcement-learning]]
+- 來源頁：[[williams2024]]、[[bluemlein2022]]、[[hong2021]]、[[desman2025]]
