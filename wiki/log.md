@@ -1,0 +1,5 @@
+# 操作紀錄（append-only）
+
+格式：日期 | 操作 | 動到的頁面 | lint 結果
+
+- 2026-11-15 | setup | 建立 AGENTS.md、index、log、tools/ | —

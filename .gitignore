@@ -1,0 +1,5 @@
+raw/*.pdf
+raw/text/
+__pycache__/
+*.png
+!docs/*.png
