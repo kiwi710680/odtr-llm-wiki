@@ -1,7 +1,7 @@
 ---
 title: 因果識別的前提假設
 type: concept
-sources: [williams2024, renson2025]
+sources: [williams2024, renson2025, bluemlein2022]
 updated: 2026-11-15
 ---
 
@@ -44,6 +44,18 @@ updated: 2026-11-15
 - 估計階段還需要一個「溫和條件」，是一種正值性：g 與 ĝ 都介於 `(ε, 1 − ε)`，ε 大於零。詳見 [[rate-double-robustness]]。[renson2025, p.4]
 - 這些假設在實際資料中如何檢驗：來源未提及。
 
+### 在 bluemlein2022 中
+
+- 論文列出四個假設：一致性、穩定單位處理值假設（SUTVA，一位病人的潛在結局與其他病人的治療指派無關）、正值性、序列可交換性（sequential exchangeability）。[bluemlein2022, p.5]
+- 正值性：對任何可能的病史，治療指派都不是確定性的。[bluemlein2022, p.6]
+- 序列可交換性：以病史為條件，就足以移除估計 HTE 時的干擾偏誤。[bluemlein2022, p.6]
+- 與 williams2024 的三個假設相比，這裡多列了 SUTVA，並把可交換性寫成「每個時間步、以病史為條件」的序列版本。[williams2024, p.3] [bluemlein2022, p.5]
+- 實作上，各方法都把整段病史放進模型，以模仿「控制所有治療前變數、試圖滿足序列可交換性」的做法。[bluemlein2022, p.12-13]
+- 真實資料的檢查：論文用 Blackwell（2014）的因果敏感度分析，改變未測量干擾的強度與方向；多數時間步的估計不隨之改變，只有第一個時間步似乎有些敏感。[bluemlein2022, p.25]
+- 這個檢查的限制：只能對線性、逆傾向分數加權的結局模型進行，不是對 DTR-CT 或 DTR-CF 本身；估計的是治療者的平均處理效應，不是個人層級的 HTE。[bluemlein2022, p.25]
+- 作者推測樹與森林可能比線性模型更不受未測量干擾影響；這是推測，論文沒有檢驗。[bluemlein2022, p.25]
+- 模擬資料中的假設是否成立：模擬資料依自己設定的資料生成過程產生，其他細節見附錄；各假設的檢驗：來源未提及。[bluemlein2022, p.11]
+
 ## 常見誤解
 
 - 「資料來自隨機試驗，所以所有假設自動成立」：論文的 BUP-NX 組內，劑量調整是依臨床判斷，而不是隨機分派，所以仍以干擾因子調整。[williams2024, p.5]
@@ -56,4 +68,5 @@ updated: 2026-11-15
 - [[decision-points-and-history]]
 - [[statistical-estimand]]
 - [[rate-double-robustness]]
-- 來源頁：[[williams2024]]、[[renson2025]]
+- [[backward-recursion]]
+- 來源頁：[[williams2024]]、[[renson2025]]、[[bluemlein2022]]

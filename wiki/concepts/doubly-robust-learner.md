@@ -1,7 +1,7 @@
 ---
 title: 倍增穩健學習器（從資料學出規則的方法）
 type: concept
-sources: [williams2024, renson2025]
+sources: [williams2024, renson2025, bluemlein2022]
 updated: 2026-11-15
 ---
 
@@ -41,6 +41,15 @@ updated: 2026-11-15
 - 干擾函數、交叉擬合與單步估計式的細節，見 [[nuisance-functions]]、[[cross-fitting]]、[[plug-in-and-one-step-estimators]]；兩篇對照見 [[method-comparison]]。
 - renson2025 是否討論動態治療規則或 blip 函數的學習：來源未提及。
 
+### 在 bluemlein2022 中
+
+- 論文的做法是「逆傾向分數加權」而不是 AIPW 轉換：在每個時間步，先用邏輯斯迴歸估傾向分數（原則上任何機率分類器都可），再以傾向分數的倒數加權結局，交給因果樹或因果森林估計處理效應。[bluemlein2022, p.7]
+- 論文說這類比 DWOLS，而 Wallace 等人（2017）顯示這種加權帶來倍增穩健：每個時間步只要傾向分數模型或處理效應模型有一個設定正確且無偏，就能得到無偏的處理效應估計，進而得到最佳決定。[bluemlein2022, p.10]
+- 論文的推論：因果樹與因果森林是 HTE 的無偏估計式，最大概似是邏輯斯迴歸參數的無偏估計式，所以它們的方法也是倍增穩健。本 wiki 在正文沒有看到另外的形式證明（本 wiki 的觀察）。[bluemlein2022, p.10]
+- 森林版的公式不用加權，而是把結局與傾向分數的「袋外」預測值代入，並以治療減傾向分數的差修正；演算法則寫成加權，兩者的關係論文沒有進一步說明。[bluemlein2022, p.7] [bluemlein2022, p.9]
+- 本 wiki 的整理：論文所稱的倍增穩健，條件與 williams2024 的「Q 或 g 有一個一致就行」同一類；收斂速率與信賴區間：來源未提及。兩篇與 renson2025 的對照見 [[method-comparison]]。[bluemlein2022, p.10]
+- 倒著逐步估計的整體流程見 [[backward-recursion]]；逆傾向分數加權的結局模型也出現在基準方法 DWOLS，見 [[q-learning-dwols-g-estimation]]。[bluemlein2022, p.23]
+
 ## 常見誤解
 
 - 「倍增穩健就是不會錯」：它只要求 Q 與 g 其中一個被一致地估計；論文另外列出推論還需要的條件。[williams2024, p.4]
@@ -58,5 +67,8 @@ updated: 2026-11-15
 - [[nuisance-functions]]
 - [[plug-in-and-one-step-estimators]]
 - [[method-comparison]]
-- 來源頁：[[williams2024]]、[[renson2025]]
+- [[backward-recursion]]
+- [[causal-tree-and-forest]]
+- [[q-learning-dwols-g-estimation]]
+- 來源頁：[[williams2024]]、[[renson2025]]、[[bluemlein2022]]
 - 名詞速查：[[glossary]]

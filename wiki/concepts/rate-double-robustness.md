@@ -1,7 +1,7 @@
 ---
 title: 速率倍增穩健（rate double robustness）
 type: concept
-sources: [renson2025, williams2024]
+sources: [renson2025, williams2024, bluemlein2022]
 updated: 2026-11-15
 ---
 
@@ -41,6 +41,11 @@ updated: 2026-11-15
 - williams2024 說的「倍增穩健」是：Q 或 g 只要有一個被一致估計，就能得到 blip 函數的無偏估計。[williams2024, p.3]
 - 這接近 renson2025 所說的「倍增穩健一致性」，而不是「速率倍增穩健」；兩者的對照見 [[method-comparison]]，這是本 wiki 的整理。williams2024 是否討論速率：來源未提及。
 
+### 在 bluemlein2022 中
+
+- 論文宣稱方法是倍增穩健，說法是：每個時間步只要傾向分數模型或處理效應模型有一個設定正確，就能得到無偏的處理效應估計。這接近「倍增穩健一致性」那一類的說法。[bluemlein2022, p.10]
+- 收斂速率、速率倍增穩健、信賴區間與推論：來源未提及。論文報告的是模擬中的平均值與標準差，見 [[regret-and-decision-accuracy]]。[bluemlein2022, p.13]
+
 ## 常見誤解
 
 - 「速率倍增穩健就是倍增穩健」：論文明說兩者不同。[renson2025, p.4]
@@ -55,4 +60,4 @@ updated: 2026-11-15
 - [[cross-fitting]]
 - [[doubly-robust-learner]]
 - [[method-comparison]]
-- 來源頁：[[renson2025]]、[[williams2024]]
+- 來源頁：[[renson2025]]、[[williams2024]]、[[bluemlein2022]]

@@ -1,7 +1,7 @@
 ---
 title: 決策時間點與病史（連續決策）
 type: concept
-sources: [williams2024]
+sources: [williams2024, bluemlein2022]
 updated: 2026-11-15
 ---
 
@@ -30,6 +30,14 @@ updated: 2026-11-15
 - 範例分析把每週治療定義為「這週的最大領取劑量有沒有比上週高」。[williams2024, p.5]
 - 時間變動干擾因子包含最近開立的劑量與前一週有無非研究用鴉片使用，見 [[identification-assumptions]]。[williams2024, p.5]
 
+### 在 bluemlein2022 中
+
+- 論文用 t = 1 到 T 表示時間步；病史 Ht 由基線共變數、到前一步為止的治療、到時間 t 為止的時間變動共變數組成；結局在時間 T + 1 觀察到。[bluemlein2022, p.4]
+- 病史中的共變數有先後之分：依測量時間，時間變動共變數可能是干擾因子，也可能是治療效果的中介；把治療後才量到的共變數放進同一個模型，會造成治療後偏誤。這是採用倒推遞迴的理由之一，見 [[backward-recursion]]。[bluemlein2022, p.6]
+- 模擬資料有 3 個時間步。[bluemlein2022, p.11]
+- 真實資料取加護病房的前 10 小時病史；模型只用三個時間步的病史，以偵測最多延遲三個時間步的效果。[bluemlein2022, p.15]
+- 論文的限制段落寫「評估兩個時間步」，與上面兩條不一致；原因來源未說明。[bluemlein2022, p.18]
+
 ## 常見誤解
 
 - 「連續決策只是把單一決策重複做很多次」：論文的作法不是各週各自獨立學，而是先學最後一步、再假設最後一步已經最佳，回頭學前一步。[williams2024, p.3]
@@ -40,4 +48,5 @@ updated: 2026-11-15
 - [[dynamic-treatment-regime]]
 - [[optimal-dynamic-treatment-rule]]
 - [[doubly-robust-learner]]
-- 來源頁：[[williams2024]]
+- [[backward-recursion]]
+- 來源頁：[[williams2024]]、[[bluemlein2022]]

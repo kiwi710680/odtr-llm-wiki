@@ -1,7 +1,7 @@
 ---
 title: 平均效果與處理效應異質性
 type: concept
-sources: [williams2024]
+sources: [williams2024, bluemlein2022]
 updated: 2026-11-15
 ---
 
@@ -28,6 +28,14 @@ updated: 2026-11-15
 - 例子：在鴉片使用障礙的一個比較有效性試驗中，學出的最佳治療規則是無家可歸的病人用注射型納曲酮、住房穩定的病人用 BUP-NX 的 RROU 風險較低。[williams2024, p.1]
 - 估計「兩種治療的結局差」如何隨 V 而變，正是 [[blip-function]]（條件平均處理效應）要做的事。[williams2024, p.3]
 
+### 在 bluemlein2022 中
+
+- 論文以個人化醫療為出發點：過去「一體適用」的做法，大致忽略病人在治療反應與風險因子上的異質性。[bluemlein2022, p.1]
+- 估計異質處理效應（HTE）的方法（因果樹、因果森林）原本為靜態設定設計，論文說它們尚未被用來學最佳 DTR，見 [[causal-tree-and-forest]]。[bluemlein2022, p.3]
+- 作者的見解：要個人化治療決定，古典統計方法與以預測為主的機器學習可能不是最佳選擇，專為因果效應估計設計的機器學習較有益處。[bluemlein2022, p.3]
+- 作者認為，古典基準假設關係已知、且所有病人由同一組變數決定治療；他們的方法允許「對決策有指示性的變數」因人而異。[bluemlein2022, p.17]
+- 古典線性方法假設同一組共變數對結局預測與對處理效應異質性都重要；實務上兩組可能不同且未知。[bluemlein2022, p.22]
+
 ## 常見誤解
 
 - 「ATE 為正就代表對每個人都有益」：論文明說不是，見上方定義。[williams2024, p.1]
@@ -38,4 +46,5 @@ updated: 2026-11-15
 - [[blip-function]]
 - [[optimal-dynamic-treatment-rule]]
 - [[dynamic-treatment-regime]]
-- 來源頁：[[williams2024]]
+- [[causal-tree-and-forest]]
+- 來源頁：[[williams2024]]、[[bluemlein2022]]

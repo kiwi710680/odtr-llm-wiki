@@ -1,7 +1,7 @@
 ---
 title: 干擾函數（nuisance function）
 type: concept
-sources: [renson2025, williams2024]
+sources: [renson2025, williams2024, bluemlein2022]
 updated: 2026-11-15
 ---
 
@@ -33,6 +33,13 @@ updated: 2026-11-15
 - williams2024 中對應的兩個函數是結局迴歸 Q(H, A) 與傾向分數 g(A, H)；論文用交叉擬合的超級學習器估計它們。[williams2024, p.3]
 - 兩篇的對應是本 wiki 的整理；williams2024 本身是否使用「干擾函數」一詞：來源未提及。
 
+### 在 bluemlein2022 中
+
+- 論文中對應的輔助估計是傾向分數與結局模型：傾向分數以邏輯斯迴歸估計，原則上任何機率分類器都可以用。[bluemlein2022, p.7]
+- 結局模型在 DTR-CT 與 DTR-CF 中由因果樹或因果森林擔任；森林版以「袋外」預測結局與傾向分數。[bluemlein2022, p.9]
+- 古典基準方法把結局模型拆成「沒有治療時的模型」與「治療交互作用模型」兩塊，兩塊都以整段病史迴歸。[bluemlein2022, p.22]
+- 論文是否使用「干擾函數」一詞：來源未提及；這裡的對應是本 wiki 的整理。
+
 ## 常見誤解
 
 - 「干擾函數不重要，反正是輔助」：它們的誤差決定推論是否有效。[renson2025, p.4]
@@ -47,4 +54,5 @@ updated: 2026-11-15
 - [[rate-double-robustness]]
 - [[cross-fitting]]
 - [[doubly-robust-learner]]
-- 來源頁：[[renson2025]]、[[williams2024]]
+- [[causal-tree-and-forest]]
+- 來源頁：[[renson2025]]、[[williams2024]]、[[bluemlein2022]]

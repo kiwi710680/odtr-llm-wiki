@@ -72,3 +72,4 @@ updated: 2026-11-15
 - 核心概念頁：[[dynamic-treatment-regime]]、[[decision-points-and-history]]、[[optimal-dynamic-treatment-rule]]、[[treatment-effect-heterogeneity]]、[[blip-function]]、[[doubly-robust-learner]]、[[identification-assumptions]]。
 - 名詞速查見 [[glossary]]。
 - 和 [[renson2025]] 的關係：兩篇都用到倍增穩健與交叉擬合，用法的異同整理在 [[method-comparison]]。
+- 和 [[bluemlein2022]] 的關係：兩篇都從最後一個時間點往前估計（見 [[backward-recursion]]），但每一步估計處理效應的工具不同（倍增穩健轉換再迴歸，對照因果樹與因果森林，見 [[causal-tree-and-forest]]）；整理在 [[method-comparison]]。

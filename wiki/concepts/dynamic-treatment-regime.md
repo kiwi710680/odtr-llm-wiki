@@ -1,7 +1,7 @@
 ---
 title: 動態治療策略（靜態與動態規則）
 type: concept
-sources: [williams2024]
+sources: [williams2024, bluemlein2022]
 updated: 2026-11-15
 ---
 
@@ -33,6 +33,14 @@ updated: 2026-11-15
 
 另一個動態規則的例子：以病人的住房狀況決定開哪一種藥；論文引用的一個試驗發現，無家可歸者用注射型納曲酮的 RROU 風險較低，住房穩定者用 BUP-NX 較低。[williams2024, p.1]
 
+### 在 bluemlein2022 中
+
+- 論文把 DTR 寫成一串決策規則：每個時間點的規則把「到那個時間點為止的病史」對應到治療選項，所有可能 DTR 的集合由所用的函數類別決定。[bluemlein2022, p.5]
+- 論文的說法：DTR 以病人的歷史資訊為輸入，輸出個人化的治療決定。[bluemlein2022, p.2]
+- 論文把既有方法分成兩條路線：統計學的古典 DTR 方法（多用線性迴歸，可解釋但結構簡單）與機器學習路線（多為黑箱）；它要找的是「可解釋、又能處理複雜關係」的方法，見 [[causal-tree-and-forest]]、[[interpretability]]。[bluemlein2022, p.2]
+- 論文說 DTR 的研究可追溯到 Robins（1997、2004）。[bluemlein2022, p.3]
+- 論文設定中的治療是二元的（治療或不治療）。[bluemlein2022, p.4]
+
 ## 常見誤解
 
 - 「劑量會隨時間增加就是動態」不一定：情境 2 每個人的劑量安排完全相同，論文仍把它歸為靜態。[williams2024, p.2]
@@ -43,5 +51,6 @@ updated: 2026-11-15
 - [[decision-points-and-history]]
 - [[optimal-dynamic-treatment-rule]]
 - [[treatment-effect-heterogeneity]]
-- 來源頁：[[williams2024]]
+- [[interpretability]]
+- 來源頁：[[williams2024]]、[[bluemlein2022]]
 - 名詞速查：[[glossary]]

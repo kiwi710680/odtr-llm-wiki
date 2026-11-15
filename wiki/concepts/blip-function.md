@@ -1,7 +1,7 @@
 ---
 title: Blip 函數（條件平均處理效應）
 type: concept
-sources: [williams2024]
+sources: [williams2024, bluemlein2022]
 updated: 2026-11-15
 ---
 
@@ -30,6 +30,16 @@ updated: 2026-11-15
 - 論文提到的一個一致估計 ψ 的條件：blip 不可為零，也就是 `P(B(V) = 0) = 0`，沒有任何個體的 CATE 剛好是零。[williams2024, p.4]
 - 論文提到可以用決策樹估計 B(V)，得到好解讀的決策規則。[williams2024, p.4]
 
+### 在 bluemlein2022 中
+
+- 論文把 blip 函數寫成：在病史條件下，若在時間 t 治療或不治療、且之後都依最佳決定，兩者潛在結局的期望差。概念出自 Robins（2004），論文也稱它為異質處理效應（heterogeneous treatment effect, HTE）。[bluemlein2022, p.5]
+- 若 HTE 已知，最佳決定就是對 HTE 為正的人給治療（假設沒有治療成本或限制）。[bluemlein2022, p.5]
+- 實際只觀察得到實際治療下的結局，所以 HTE 是反事實量，要靠假設才能從資料識別，見 [[identification-assumptions]]。[bluemlein2022, p.5]
+- 估計方式：DTR-CT 以每片葉子內治療組與未治療組的（逆傾向分數加權）平均結局之差，當作該葉的 HTE；DTR-CF 以局部鄰域的加權平均估計。見 [[causal-tree-and-forest]]。[bluemlein2022, p.9]
+- 古典方法（Q 學習等）則假設 blip 是病史的線性函數，稱為 blip model（治療交互作用模型），見 [[q-learning-dwols-g-estimation]]。[bluemlein2022, p.22]
+- 與 williams2024 的對照：williams2024 的範例以 ℓ1 正規化估計 blip；bluemlein2022 直接用樹或森林估計。[williams2024, p.5] [bluemlein2022, p.9]
+- 真實資料的樹中，每片葉子標示該亞群的估計處理效應與對應的最佳決定。[bluemlein2022, p.16-17]
+
 ## 常見誤解
 
 - 「blip 是某一個人的真實效果」：它是在 V 相同的人之中的平均差，不是個人的效果；論文把它稱為 CATE。[williams2024, p.3]
@@ -41,4 +51,6 @@ updated: 2026-11-15
 - [[doubly-robust-learner]]
 - [[optimal-dynamic-treatment-rule]]
 - [[identification-assumptions]]
-- 來源頁：[[williams2024]]
+- [[causal-tree-and-forest]]
+- [[q-learning-dwols-g-estimation]]
+- 來源頁：[[williams2024]]、[[bluemlein2022]]

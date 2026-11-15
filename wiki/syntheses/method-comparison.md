@@ -1,13 +1,13 @@
 ---
 title: 方法比較：估計式家族與「倍增穩健」的兩種意思
 type: synthesis
-sources: [renson2025, williams2024]
+sources: [renson2025, williams2024, bluemlein2022]
 updated: 2026-11-15
 ---
 
 # 方法比較：估計式家族與「倍增穩健」的兩種意思
 
-這一頁把 [[renson2025]] 與 [[williams2024]] 對同一批工具的說法放在一起。重點是：兩篇的目標不同，所以同一個名字（AIPW、倍增穩健）出現時，要先問「它在估計什麼」。本頁只整理兩篇各自說了什麼，不評斷誰對。目前沒有發現兩篇互相矛盾的陳述，所以沒有建立 disagreements 頁。
+這一頁把 [[renson2025]] 與 [[williams2024]] 對同一批工具的說法放在一起。重點是：兩篇的目標不同，所以同一個名字（AIPW、倍增穩健）出現時，要先問「它在估計什麼」。本頁只整理兩篇各自說了什麼，不評斷誰對。加入 [[bluemlein2022]] 之後（見文末「加入 bluemlein2022 之後」一節），仍沒有發現互相矛盾的陳述：各篇談的是不同性質或不同條件，所以沒有建立 disagreements 頁。
 
 ## 兩篇的目標不同
 
@@ -35,10 +35,45 @@ updated: 2026-11-15
 - 本 wiki 的判讀：williams2024 的「倍增穩健」描述的是第一種性質，renson2025 把它與第二種性質分開；兩者談的是不同性質，並不互相否定。williams2024 是否討論速率倍增穩健：來源未提及。
 - 詳見 [[doubly-robust-learner]]、[[rate-double-robustness]]。
 
+## 加入 bluemlein2022 之後
+
+[[bluemlein2022]] 的目標是提出新方法：用因果樹與因果森林學最佳 DTR。它和前兩篇的重疊在「多個時間點」與「倍增穩健」。本節只整理三篇各自說了什麼。[bluemlein2022, p.1]
+
+| 面向 | williams2024 | renson2025 | bluemlein2022 |
+|---|---|---|---|
+| 目標 | 教學如何從縱貫資料學最佳規則。[williams2024, p.1] | 教學如何推導搭配機器學習的估計式。[renson2025, p.1] | 提出 DTR-CT 與 DTR-CF 兩個新方法。[bluemlein2022, p.1] |
+| 多個時間點 | 從最後一個時間點往回做。[williams2024, p.5] | 只討論單一時間點。[renson2025, p.2] | 倒推遞迴與偽結局，見 [[backward-recursion]]。[bluemlein2022, p.7] |
+| 估計 blip／HTE 的工具 | 倍增穩健的 AIPW 轉換，再迴歸。[williams2024, p.3] | 估計目標不是 blip。[renson2025, p.3] | 逆傾向分數加權後，用因果樹或因果森林。[bluemlein2022, p.7] |
+| 傾向分數與結局模型 | 範例用交叉擬合的超級學習器。[williams2024, p.5] | 兩者是干擾函數，可用機器學習估計。[renson2025, p.3] | 傾向分數用邏輯斯迴歸，結局模型由樹或森林擔任。[bluemlein2022, p.7] |
+| 樣本分割 | 範例用交叉擬合。[williams2024, p.5] | 干擾函數須在另一份樣本估計。[renson2025, p.4] | 誠實分割：訓練集與估計集。[bluemlein2022, p.8] |
+| 可解釋性 | 提到決策樹可得到好解讀的規則。[williams2024, p.4] | 來源未提及。 | 核心賣點，見 [[interpretability]]。[bluemlein2022, p.2] |
+| 實證 | 鴉片使用障礙病人的劑量資料。[williams2024, p.5] | 沒有新資料。[renson2025, p.5] | 模擬資料與 MIMIC-III 加護病房資料。[bluemlein2022, p.1] |
+| 評估學出的規則 | 規則價值的估計與風險比。[williams2024, p.6] | 沒有。[renson2025, p.5] | 後悔值、決策準確度、期望增益，見 [[regret-and-decision-accuracy]]。[bluemlein2022, p.13] |
+| Q 學習 | 只列名為迴歸式方法的一類。[williams2024, p.3] | 來源未提及。 | 線性基準方法，見 [[q-learning-dwols-g-estimation]]。[bluemlein2022, p.12] |
+
+### 「倍增穩健」的第三種說法
+
+- bluemlein2022 的說法：類比 DWOLS，用逆傾向分數加權結局；每個時間步只要傾向分數模型或處理效應模型有一個設定正確且無偏，就得到無偏的處理效應估計。條件：兩個模型至少一個設定正確。[bluemlein2022, p.10]
+- 它的論證方式：因果樹與因果森林是 HTE 的無偏估計式，最大概似是邏輯斯迴歸參數的無偏估計式，所以方法也是倍增穩健。[bluemlein2022, p.10]
+- 與 williams2024 的對照：兩者的條件都是「兩個函數至少一個正確」，但 williams2024 用 AIPW 轉換，bluemlein2022 用逆傾向分數加權。[williams2024, p.3] [bluemlein2022, p.7]
+- 與 renson2025 的對照：renson2025 把「倍增穩健一致性」與「速率倍增穩健」分開，並說逆機率加權（IPW）不是速率倍增穩健的例子。[renson2025, p.3] [renson2025, p.4]
+- bluemlein2022 是否討論收斂速率或信賴區間：來源未提及。
+- 本 wiki 的判讀：bluemlein2022 的「倍增穩健」屬於第一種性質（一致性或無偏性），沒有主張第二種性質（速率）；所以三篇沒有互相否定。但 bluemlein2022 的論證是以無偏性類推，正文沒有看到速率層面的說明，日後引用時要說清楚是哪一種。
+
+### 其他並排觀察
+
+- 估計 HTE 的做法：williams2024 以迴歸（例如 ℓ1 正規化）估計 blip，bluemlein2022 以樹或森林估計；兩者都屬資料自適應的方法，但可解釋性的程度不同，見 [[interpretability]]。[williams2024, p.5] [bluemlein2022, p.10]
+- 古典 Q 學習的假設：低維、線性、已知的函數形式；williams2024 與 renson2025 的方法則強調可以搭配彈性的機器學習。[bluemlein2022, p.22] [williams2024, p.4] [renson2025, p.1]
+
 ## 相關頁面
 
 - [[plug-in-and-one-step-estimators]]
 - [[cross-fitting]]
 - [[nuisance-functions]]
 - [[efficient-influence-function]]
+- [[backward-recursion]]
+- [[causal-tree-and-forest]]
+- [[interpretability]]
+- [[regret-and-decision-accuracy]]
+- [[q-learning-dwols-g-estimation]]
 - [[glossary]]

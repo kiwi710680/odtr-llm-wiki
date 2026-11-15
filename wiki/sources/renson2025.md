@@ -70,4 +70,5 @@ updated: 2026-11-15
 - 核心概念頁：[[statistical-estimand]]、[[nuisance-functions]]、[[efficient-influence-function]]、[[plug-in-and-one-step-estimators]]、[[rate-double-robustness]]、[[cross-fitting]]。
 - 延伸的既有概念頁：[[doubly-robust-learner]]、[[identification-assumptions]]。
 - 與 [[williams2024]] 的對照（AIPW、交叉擬合、「倍增穩健」的兩種意思）：見 [[method-comparison]]。
+- 與 [[bluemlein2022]] 的對照：bluemlein2022 也宣稱倍增穩健，但談的是無偏性層面，沒有討論收斂速率；見 [[method-comparison]]、[[rate-double-robustness]]。
 - 名詞速查見 [[glossary]]。

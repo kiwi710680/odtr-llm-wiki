@@ -1,7 +1,7 @@
 ---
 title: 交叉擬合與樣本分割（cross-fitting）
 type: concept
-sources: [renson2025, williams2024]
+sources: [renson2025, williams2024, bluemlein2022]
 updated: 2026-11-15
 ---
 
@@ -32,6 +32,13 @@ updated: 2026-11-15
 - 論文說，被估計的函數「夠平滑」這個條件可以用樣本分割繞過。[williams2024, p.4]
 - 兩篇的說法方向一致（用樣本分割避開對干擾估計式的額外條件），但用詞不同；本頁不判斷兩個條件是不是同一個條件：來源未提及。
 
+### 在 bluemlein2022 中
+
+- 論文的樣本分割叫誠實分割（honest splitting）：把資料分成訓練集（模型選擇）與估計集（模型估計），兩者不重疊，目的是確保無偏並避免過度配適。[bluemlein2022, p.8]
+- 設定：DTR-CT 以 50 % 訓練、50 % 估計；用 5 折交叉驗證決定剪枝。[bluemlein2022, p.24]
+- 森林版：結局與傾向分數用「袋外」方式預測，不使用該病人自己的資料。[bluemlein2022, p.9]
+- 論文沒有使用「交叉擬合」一詞，也沒有說明誠實分割是否等同 renson2025 所說的、讓干擾函數與最後估計式用不同樣本的條件：來源未提及。詳見 [[causal-tree-and-forest]]。
+
 ## 常見誤解
 
 - 「交叉擬合就保證有效推論」：論文說使用 EIF 型估計式並不會自動處理餘項，還需要速率倍增穩健性。[renson2025, p.4]
@@ -44,5 +51,6 @@ updated: 2026-11-15
 - [[rate-double-robustness]]
 - [[plug-in-and-one-step-estimators]]
 - [[doubly-robust-learner]]
-- 來源頁：[[renson2025]]、[[williams2024]]
+- [[causal-tree-and-forest]]
+- 來源頁：[[renson2025]]、[[williams2024]]、[[bluemlein2022]]
 - 名詞速查：[[glossary]]

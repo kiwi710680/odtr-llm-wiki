@@ -1,7 +1,7 @@
 ---
 title: 最佳動態治療規則（ODTR）與規則的價值
 type: concept
-sources: [williams2024]
+sources: [williams2024, bluemlein2022]
 updated: 2026-11-15
 ---
 
@@ -29,6 +29,15 @@ updated: 2026-11-15
 - 學出的規則在範例中變成「每週加量（第 3 週除外）」，論文認為這在只看前 6 週的設定下不令人意外。[williams2024, p.6]
 - 作者提到「ODTR 集成」（ODTR ensembles）：讓回歸類、分類類與簡單靜態策略一起「競爭」，由資料自適應地選出最佳策略。[williams2024, p.6]
 
+### 在 bluemlein2022 中
+
+- 論文的估計目標是最佳 DTR：在所有可能 DTR 的集合中，讓規則的價值（若人人依該規則治療，結局的母體平均）最大的那一條。[bluemlein2022, p.5]
+- 論文以潛在結局架構（Neyman 1923；Rubin 1974）表達，結局以「越大越好」為準（不失一般性）。[bluemlein2022, p.5] [bluemlein2022, p.4]
+- 作者宣稱這是第一篇把因果樹方法用來學最佳 DTR 的論文。[bluemlein2022, p.1]
+- 評估方式：模擬資料有真值，用後悔值與決策準確度；真實資料用期望增益。見 [[regret-and-decision-accuracy]]。[bluemlein2022, p.13] [bluemlein2022, p.16]
+- 論文報告的是上述指標，沒有報告學出規則之價值（平均結局）的估計與信賴區間：來源未提及。
+- 估計 ODTR 的另一類做法（Q 學習等古典迴歸式方法）見 [[q-learning-dwols-g-estimation]]。
+
 ## 常見誤解
 
 - 「最佳」是指在族群平均意義上讓反事實結局最好；論文並沒有保證學出的規則一定贏過臨床規則：與 d1 的比較，論文說差異不具意義（RR = 0.93; 95% CI, 0.77-1.13）。[williams2024, p.6]
@@ -41,4 +50,6 @@ updated: 2026-11-15
 - [[decision-points-and-history]]
 - [[blip-function]]
 - [[doubly-robust-learner]]
-- 來源頁：[[williams2024]]
+- [[regret-and-decision-accuracy]]
+- [[q-learning-dwols-g-estimation]]
+- 來源頁：[[williams2024]]、[[bluemlein2022]]

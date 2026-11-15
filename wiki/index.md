@@ -7,6 +7,7 @@
 
 - [[williams2024]] — Williams 等人：從縱貫資料學習最佳動態治療規則（教學型論文，BUP-NX 劑量範例）。
 - [[renson2025]] — Renson 等人：從統計估計目標推導機器學習估計式（EIF、單步估計式、速率倍增穩健）。
+- [[bluemlein2022]] — Blümlein 等人：用因果樹與因果森林學最佳動態治療策略（DTR-CT／DTR-CF，倒推遞迴，模擬與 MIMIC-III 加護病房資料）。
 
 ## 概念（concepts）
 
@@ -23,10 +24,15 @@
 - [[plug-in-and-one-step-estimators]] — 代入式與單步（AIPW）估計式。
 - [[rate-double-robustness]] — 速率倍增穩健：為什麼能配機器學習又有有效推論。
 - [[cross-fitting]] — 交叉擬合與樣本分割。
+- [[backward-recursion]] — 倒推遞迴與偽結局：從最後一個時間點往前估計。
+- [[q-learning-dwols-g-estimation]] — Q 學習、DWOLS 與 G 估計：古典的線性迴歸式方法。
+- [[causal-tree-and-forest]] — 因果樹與因果森林：誠實分割、用樹估計處理效應。
+- [[interpretability]] — 可解釋性：interpretable 與 explainable 的差別。
+- [[regret-and-decision-accuracy]] — 後悔值與決策準確度：模擬與真實資料怎麼評估學出的規則。
 
 ## 比較與綜合（syntheses）
 
-- [[method-comparison]] — 方法比較：估計式家族，以及「倍增穩健」在兩篇中的兩種意思。
+- [[method-comparison]] — 方法比較：估計式家族，「倍增穩健」的幾種意思，以及三篇在多時間點、可解釋性、評估方式上的對照。
 
 ## 術語表
 
