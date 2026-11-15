@@ -1,0 +1,16 @@
+# 證據卡：williams2024
+
+- williams2024-C1: 靜態規則的意思是每個人都拿到同一個治療，不管這個人的資料長什麼樣子。 [williams2024, p.2] ← [[dynamic-treatment-regime]]
+- williams2024-C2: 動態規則則是讓治療依每個人已經量測到的病史而定，病史不同，給的治療可以不同。 [williams2024, p.2] ← [[dynamic-treatment-regime]]
+- williams2024-C3: 研究常報告平均處理效應，但它只描述平均，沒有告訴我們治療對某一個人的效果，所以才需要個人化的規則。 [williams2024, p.1] ← [[williams2024]]
+- williams2024-C4: 治療常常不只發生在一個時間點，而是一連串的決定與調整；同一個人在情況變化時，受益的程度也會不同。 [williams2024, p.1] ← [[williams2024]]
+- williams2024-C5: 論文的範例問題是：在治療的前 6 週，何時該提高 BUP-NX 劑量，才能讓回到規律鴉片使用的風險最小。 [williams2024, p.4] ← [[williams2024]]
+- williams2024-C6: 範例中拿來比較的動態劑量規則 d1 很簡單：前一週有鴉片使用就增量。 [williams2024, p.5] ← [[williams2024]]
+- williams2024-C7: 方法的一句話版本：有多個時間點時，從最後一個時間點往回推，先學最後一步的最佳規則，再假設最後一步已照最佳規則做，回頭學前一步。 [williams2024, p.3] ← [[williams2024]]
+- williams2024-C8: 若治療前 6 週都不再提高劑量（固定劑量規則），估計的第 6 週回到規律鴉片使用的風險為 0.388。 [williams2024, p.6] ← [[williams2024]]
+- williams2024-C9: 學出的最佳規則，估計的第 6 週回到規律鴉片使用的風險為 0.324。 [williams2024, p.6] ← [[williams2024]]
+- williams2024-C10: 論文報告學出的規則比固定劑量降低風險 16.6%（RR = 0.83; 95% CI, 0.68-1.02）。 [williams2024, p.6] ← [[williams2024]]
+- williams2024-C11: 學出的規則與簡單的 d1 相比，估計降低 6.8%，但論文說這個差異不具意義。 [williams2024, p.6] ← [[williams2024]]
+- williams2024-C12: 論文提醒，不同演算法在有限樣本下表現可能不同，而最佳策略也可能其實是簡單的靜態規則。 [williams2024, p.6] ← [[williams2024]]
+- williams2024-C13: 用觀察資料學規則，論文列出三個前提：一致性、無未測量干擾（可交換性）、正值性（每一層的人都有機會接受各種治療）。 [williams2024, p.3] ← [[identification-assumptions]]
+- williams2024-C14: 所有要比較的規則都必須在資料中有支持，也就是要觀察到有人照每條規則做過。 [williams2024, p.3] ← [[identification-assumptions]]

@@ -11,7 +11,7 @@ import re
 import sys
 from pathlib import Path
 
-from common import CITE_RE, LINK_RE, ROOT, WIKI, RAW_TEXT, check_citations_and_numbers, numbers_in
+from common import CITE_RE, LINK_RE, ROOT, WIKI, RAW_TEXT, check_citations_and_numbers, normalise, numbers_in
 
 CLAIM_RE = re.compile(r"^- ([a-z]+\d{4}-C\d+):\s*(.+)$")
 ALL_SOURCES = sorted(p.stem for p in RAW_TEXT.glob("*.txt"))
@@ -86,7 +86,8 @@ def check_cards(d: Path) -> list[str]:
             if page not in WIKI_PAGES:
                 errs.append(f"{where}: [cards] wiki page [[{page}]] does not exist")
                 continue
-            ptext = WIKI_PAGES[page].read_text(encoding="utf-8")
+            # normalise so "8,059" / "8, 059" on the page match the parsed number 8059
+            ptext = normalise(WIKI_PAGES[page].read_text(encoding="utf-8"))
             norm = lambda s: re.sub(r"\s+", "", s)
             for c in cites:
                 if norm(c) not in norm(ptext):
@@ -152,7 +153,7 @@ def check_drafts(d: Path) -> list[str]:
         allowed_text = ""
         for c in assigned:
             if c in claims:
-                allowed_text += claims[c][0]
+                allowed_text += normalise(claims[c][0])
                 allowed_cites |= {re.sub(r"\s+", "", m.group(0)) for m in CITE_RE.finditer(claims[c][0])}
         n_cites = 0
         for i, line in enumerate(body, 1):
