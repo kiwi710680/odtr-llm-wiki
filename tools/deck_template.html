@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff; --ink: #1d1d1f; --muted: #6b6b70; --line: #e4e2dc;
+    --accent: #1f5f5b; --accent-soft: #e8f0ef; --warn: #9a4a1c; --warn-soft: #f6ece4;
+    --page: #f3f2ee;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--page); color: var(--ink);
+    font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif; }
+  .stage-wrap { position: fixed; inset: 0; display: grid; place-items: center; overflow: hidden; }
+  .stage { width: 1280px; height: 720px; position: relative; transform-origin: center center; }
+  .slide { position: absolute; inset: 0; background: var(--bg); padding: 56px 72px 0; display: none;
+    flex-direction: column; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+  .slide.active { display: flex; }
+  .content { flex: 1; min-height: 0; overflow: hidden; }
+  .kicker { margin: 0 0 6px; font-size: 18px; letter-spacing: .08em; color: var(--accent); font-weight: 500; }
+  h2 { font-family: "Noto Serif TC", serif; font-size: 40px; line-height: 1.3; margin: 0 0 26px; font-weight: 700; }
+  p, li { font-size: 25px; line-height: 1.6; }
+  p { margin: 0 0 14px; }
+  ul, ol { margin: 0; padding-left: 1.2em; }
+  li { margin-bottom: 12px; }
+  li::marker { color: var(--accent); }
+  strong { color: var(--accent); font-weight: 700; }
+  blockquote { margin: 0 0 18px; padding: 14px 22px; background: var(--accent-soft); border-left: 4px solid var(--accent);
+    font-size: 25px; line-height: 1.6; }
+  table { border-collapse: collapse; width: 100%; font-size: 21px; line-height: 1.45; }
+  th { text-align: left; font-weight: 700; border-bottom: 2px solid var(--ink); padding: 8px 10px; }
+  td { border-bottom: 1px solid var(--line); padding: 9px 10px; vertical-align: top; }
+  sup.fn { font-size: .55em; color: var(--accent); margin-left: 1px; }
+  .cols { display: flex; gap: 48px; }
+  .col { flex: 1; }
+  .diagram { margin: 0 0 18px; }
+  .diagram svg { width: 100%; height: auto; display: block; }
+  .refs { border-top: 1px solid var(--line); padding: 10px 0 14px; font-size: 14px; color: var(--muted);
+    display: flex; flex-wrap: wrap; gap: 4px 18px; margin-right: 90px; }
+  .refs .wk { color: var(--accent); }
+  .pageno { position: absolute; right: 72px; bottom: 14px; font-size: 14px; color: var(--muted); }
+  .notes { display: none; }
+  .slide.title { justify-content: center; padding-bottom: 40px; }
+  .slide.title .content { flex: 0 0 auto; }
+  .slide.title h2 { font-size: 58px; margin-bottom: 22px; }
+  .slide.title p { font-size: 26px; color: var(--muted); }
+  .slide.quote blockquote { font-size: 30px; }
+  .bar { position: fixed; left: 0; bottom: 0; height: 3px; background: var(--accent); transition: width .2s; }
+  .hint { position: fixed; right: 14px; bottom: 10px; font-size: 12px; color: var(--muted); }
+  .show-notes .notes { display: block; position: absolute; left: 0; right: 0; top: 100%; margin-top: 8px;
+    background: #fffbe8; padding: 10px 14px; font-size: 16px; }
+  /* overview mode: ?all — every slide stacked, used for printing and checks */
+  body.all .stage-wrap { position: static; display: block; }
+  body.all .stage { transform: none !important; margin: 24px auto; height: auto; }
+  body.all .slide { display: flex; position: relative; height: 720px; margin-bottom: 24px; }
+  body.all .bar, body.all .hint { display: none; }
+  @media print { body { background: #fff; } body.all .slide { break-after: page; box-shadow: none; } }
+</style>
+</head>
+<body>
+<div class="stage-wrap"><div class="stage" id="stage">
+{{SLIDES}}
+</div></div>
+<div class="bar" id="bar"></div>
+<div class="hint">← → 換頁 · N 講者備註 · ?all 全部攤開</div>
+<script>
+(function () {
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const all = new URLSearchParams(location.search).has('all');
+  let i = 0;
+  try { i = Math.max(0, Math.min(slides.length - 1, parseInt(location.hash.slice(1), 10) - 1 || 0)); } catch (e) {}
+  if (all) document.body.classList.add('all');
+  function fit() {
+    if (all) return;
+    const s = Math.min(window.innerWidth / 1280, window.innerHeight / 720) * 0.96;
+    document.getElementById('stage').style.transform = 'scale(' + s + ')';
+  }
+  function show(k) {
+    i = Math.max(0, Math.min(slides.length - 1, k));
+    slides.forEach((el, j) => el.classList.toggle('active', j === i));
+    document.getElementById('bar').style.width = ((i + 1) / slides.length * 100) + '%';
+    if (!all) history.replaceState(null, '', '#' + (i + 1));
+  }
+  document.addEventListener('keydown', e => {
+    if (['ArrowRight', 'PageDown', ' '].includes(e.key)) show(i + 1);
+    if (['ArrowLeft', 'PageUp'].includes(e.key)) show(i - 1);
+    if (e.key === 'Home') show(0);
+    if (e.key === 'End') show(slides.length - 1);
+    if (e.key === 'n' || e.key === 'N') document.body.classList.toggle('show-notes');
+  });
+  document.getElementById('stage').addEventListener('click', e => {
+    if (all) return;
+    const r = e.currentTarget.getBoundingClientRect();
+    show(e.clientX - r.left > r.width / 3 ? i + 1 : i - 1);
+  });
+  let sx = null;
+  document.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
+  document.addEventListener('touchend', e => {
+    if (sx === null) return;
+    const dx = e.changedTouches[0].clientX - sx;
+    if (Math.abs(dx) > 40) show(dx < 0 ? i + 1 : i - 1);
+    sx = null;
+  });
+  window.addEventListener('resize', fit);
+  // G6 render check: list slides whose content or footer does not fit inside the 1280x720 slide.
+  window.deckOverflow = function () {
+    const bad = [];
+    slides.forEach((el, j) => {
+      const was = el.classList.contains('active');
+      el.classList.add('active');
+      const c = el.querySelector('.content');
+      const refs = el.querySelector('.refs');
+      const over = c.scrollHeight - c.clientHeight;
+      const wide = Array.from(c.querySelectorAll('*')).some(x => x.scrollWidth > x.clientWidth + 2 && getComputedStyle(x).overflowX !== 'visible');
+      if (over > 2 || wide || (refs && refs.getBoundingClientRect().bottom > el.getBoundingClientRect().bottom + 1)) {
+        bad.push({ slide: j + 1, src: el.dataset.src, overflowPx: over });
+      }
+      if (!was && !all) el.classList.remove('active');
+    });
+    show(i);
+    return bad;
+  };
+  fit(); show(i);
+})();
+</script>
+</body>
+</html>
