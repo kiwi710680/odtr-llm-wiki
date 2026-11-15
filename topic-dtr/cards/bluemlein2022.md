@@ -12,3 +12,5 @@
 - bluemlein2022-C10: 論文摘要說，在模擬資料上，兩個方法在累積後悔值與最佳決策的百分比上，以相當大的差距勝過最新基準方法。 [bluemlein2022, p.1] ← [[bluemlein2022]]
 - bluemlein2022-C11: 在非線性交互作用的模擬情境中，DTR-CT 與 DTR-CF 的累積後悔值分別降低 25.1 % 與 48.2 %（後悔值越小越好）。 [bluemlein2022, p.13] ← [[bluemlein2022]]
 - bluemlein2022-C12: 真實資料沒有真正的最佳答案可比，論文明說不與其他方法比較，因為估計的處理效應尺度隨方法而異，所以不同方法的數字不應直接比大小。 [bluemlein2022, p.16] ← [[bluemlein2022]]
+- bluemlein2022-C13: 引言說，與表現最好的基準方法相比，累積後悔值降低超過 20 %。 [bluemlein2022, p.2] ← [[bluemlein2022]]
+- bluemlein2022-C14: 後悔值（regret）是學出的規則與真正最佳規則在結局上的差；決定相同時為零，越小越好。 [bluemlein2022, p.13] ← [[regret-and-decision-accuracy]]

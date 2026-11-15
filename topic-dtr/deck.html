@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>動態治療策略是什麼？</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff; --ink: #1d1d1f; --muted: #6b6b70; --line: #e4e2dc;
+    --accent: #1f5f5b; --accent-soft: #e8f0ef; --warn: #9a4a1c; --warn-soft: #f6ece4;
+    --page: #f3f2ee;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--page); color: var(--ink);
+    font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif; }
+  .stage-wrap { position: fixed; inset: 0; overflow: hidden; }
+  .stage { width: 1280px; height: 720px; position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, -50%); transform-origin: center center; }
+  .slide { position: absolute; inset: 0; background: var(--bg); padding: 56px 72px 0; display: none;
+    flex-direction: column; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+  .slide.active { display: flex; }
+  .content { flex: 1; min-height: 0; overflow: hidden; }
+  .kicker { margin: 0 0 6px; font-size: 18px; letter-spacing: .08em; color: var(--accent); font-weight: 500; }
+  h2 { font-family: "Noto Serif TC", serif; font-size: 40px; line-height: 1.3; margin: 0 0 26px; font-weight: 700; }
+  p, li { font-size: 25px; line-height: 1.6; }
+  p { margin: 0 0 14px; }
+  ul, ol { margin: 0; padding-left: 1.2em; }
+  li { margin-bottom: 12px; }
+  li::marker { color: var(--accent); }
+  strong { color: var(--accent); font-weight: 700; }
+  blockquote { margin: 0 0 18px; padding: 14px 22px; background: var(--accent-soft); border-left: 4px solid var(--accent);
+    font-size: 25px; line-height: 1.6; }
+  table { border-collapse: collapse; width: 100%; font-size: 21px; line-height: 1.45; }
+  th { text-align: left; font-weight: 700; border-bottom: 2px solid var(--ink); padding: 8px 10px; }
+  td { border-bottom: 1px solid var(--line); padding: 9px 10px; vertical-align: top; }
+  sup.fn { font-size: .55em; color: var(--accent); margin-left: 1px; }
+  .cols { display: flex; gap: 48px; }
+  .col { flex: 1; }
+  .diagram { margin: 0 0 18px; }
+  .diagram svg { width: 100%; height: auto; display: block; }
+  .refs { border-top: 1px solid var(--line); padding: 10px 0 14px; font-size: 14px; color: var(--muted);
+    display: flex; flex-wrap: wrap; gap: 4px 18px; margin-right: 90px; }
+  .refs .wk { color: var(--accent); }
+  .pageno { position: absolute; right: 72px; bottom: 14px; font-size: 14px; color: var(--muted); }
+  .notes { display: none; }
+  .slide.title { justify-content: center; padding-bottom: 40px; }
+  .slide.title .content { flex: 0 0 auto; }
+  .slide.title h2 { font-size: 58px; margin-bottom: 22px; }
+  .slide.title p { font-size: 26px; color: var(--muted); }
+  .slide.quote blockquote { font-size: 30px; }
+  .bar { position: fixed; left: 0; bottom: 0; height: 3px; background: var(--accent); transition: width .2s; }
+  .hint { position: fixed; right: 14px; bottom: 10px; font-size: 12px; color: var(--muted); }
+  .show-notes .notes { display: block; position: absolute; left: 0; right: 0; top: 100%; margin-top: 8px;
+    background: #fffbe8; padding: 10px 14px; font-size: 16px; }
+  /* overview mode: ?all — every slide stacked, used for printing and checks */
+  body.all .stage-wrap { position: static; display: block; }
+  body.all .stage { transform: none !important; position: relative; left: auto; top: auto; margin: 24px auto; height: auto; }
+  body.all .slide { display: flex; position: relative; height: 720px; margin-bottom: 24px; }
+  body.all .bar, body.all .hint { display: none; }
+  @media print { body { background: #fff; } body.all .slide { break-after: page; box-shadow: none; } }
+</style>
+</head>
+<body>
+<div class="stage-wrap"><div class="stage" id="stage">
+<section class='slide title' data-n='1' data-src='s01.md'><div class='content'><h2>動態治療策略是什麼？</h2><p>給沒有因果推論背景的同學：治療常常不只發生在一個時間點，而是一連串的決定與調整 <sup class="fn">①</sup></p></div><footer class='refs'><span>① Williams et al., Am J Epidemiol 2024, p.1</span></footer><aside class='notes'>這一頁只說主題與對象。告訴同學：今天不需要先會統計，我們從「為什麼平均不夠用」開始講。</aside><div class='pageno'>1 / 14</div></section>
+<section class='slide bullets' data-n='2' data-src='s02.md'><div class='content'><p class=kicker>第一部分・為什麼需要動態規則</p><h2>平均效果，回答不了「我該怎麼治療」</h2><ul><li>研究常報告平均處理效應（average treatment effect）：它只描述平均，沒有告訴我們治療對某一個人的效果，所以才需要個人化的規則。 <sup class="fn">①</sup></li><li>治療常常不只發生在一個時間點，而是一連串的決定與調整；同一個人在情況變化時，受益的程度也會不同。 <sup class="fn">①</sup></li></ul>
+<blockquote>平均說的是「一群人」，治療要決定的是「這個人、這一刻」。</blockquote></div><footer class='refs'><span>① Williams et al., Am J Epidemiol 2024, p.1</span></footer><aside class='notes'>用「全班平均分數」比喻：知道平均，並不能告訴你某位同學該補哪一科。治療又像連續劇，每一集都要重新決定怎麼演。</aside><div class='pageno'>2 / 14</div></section>
+<section class='slide two-col' data-n='3' data-src='s03.md'><div class='content'><p class=kicker>第一部分・概念</p><h2>靜態規則 vs 動態規則</h2><div class='cols'><div class='col'><ul><li><strong>靜態規則（static regime）</strong>：每個人都拿到同一個治療，不管這個人的資料長什麼樣子。 <sup class="fn">①</sup></li></ul>
+</div><div class='col'>
+<ul><li><strong>動態規則（dynamic regime）</strong>：治療依每個人已經量測到的病史（到目前為止記錄下來的資料）而定，病史不同，給的治療可以不同。 <sup class="fn">①</sup></li><li>一個簡單的動態規則例子 d1：前一週有鴉片使用就增量。 <sup class="fn">②</sup></li></ul></div></div></div><footer class='refs'><span>① Williams et al., Am J Epidemiol 2024, p.2</span> <span>② Williams et al., Am J Epidemiol 2024, p.5</span></footer><aside class='notes'>重點是「依資料而定」。靜態規則像統一發的制服（所有人吃同一種藥、同一個劑量），動態規則像量身訂做；病史就是到目前為止已經量到的資料；d1 就是一條簡單的「如果…就…」規則。</aside><div class='pageno'>3 / 14</div></section>
+<section class='slide bullets' data-n='4' data-src='s04.md'><div class='content'><p class=kicker>第一部分・一個完整例子</p><h2>例子：BUP-NX 什麼時候該加量？</h2><ul><li>論文的範例問題：在治療的前 6 週，何時該提高 BUP-NX 劑量，才能讓回到規律鴉片使用的風險最小。 <sup class="fn">①</sup></li><li>拿來比較的動態劑量規則 d1 很簡單：前一週有鴉片使用就增量。 <sup class="fn">②</sup></li></ul>
+<blockquote>這個例子裡：時間點是每週，規則看的是前一週有沒有用鴉片，決定要不要加量，目標是風險最小。 <sup class="fn">①</sup> <sup class="fn">②</sup></blockquote></div><footer class='refs'><span>① Williams et al., Am J Epidemiol 2024, p.4</span> <span>② Williams et al., Am J Epidemiol 2024, p.5</span></footer><aside class='notes'>先讓同學看見「具體問題長什麼樣」：每週看一次情況，決定要不要加量。回到規律鴉片使用，就是病人又回頭規律地使用鴉片；治療的目標是讓這件事發生的風險最小。BUP-NX 是論文用的藥物劑量例子，不需要先懂藥理。</aside><div class='pageno'>4 / 14</div></section>
+<section class='slide bullets' data-n='5' data-src='s05.md'><div class='content'><p class=kicker>第二部分・怎麼學出規則</p><h2>怎麼學：從最後一步往回推</h2><ul><li>一句話版本：有多個時間點時，從最後一個時間點往回推，先學最後一步的最佳規則，再假設最後一步已照最佳規則做，回頭學前一步。 <sup class="fn">①</sup></li><li>「倒推」只是估計的順序從最後一個決策時間點開始往前做，資料仍按時間記錄；因為現在該怎麼決定，要考慮之後會採取哪些決定。 <sup class="fn">②</sup></li><li>結局只在最後一步才看得到，所以每一步改為最佳化「偽結局」（pseudo-outcome），也就是假如病人在之後的時間步都被最佳治療，會有的潛在結局。 <sup class="fn">③</sup></li><li>倒推時每一步都先估計「治療的效果」，效果為正就給治療，否則不給。 <sup class="fn">④</sup></li></ul></div><footer class='refs'><span>① Williams et al., Am J Epidemiol 2024, p.3</span> <span>② Blümlein et al., PMLR (MLHC) 2022, p.5</span> <span>③ Blümlein et al., PMLR (MLHC) 2022, p.6</span> <span>④ Blümlein et al., PMLR (MLHC) 2022, p.7</span></footer><aside class='notes'>比喻成下棋復盤：先想最後一手怎麼下最好，再問「如果最後一手會這樣下，前一手該怎麼走」。偽結局就是「假設後面都做對了，會得到的結果」。決策時間點就是需要做決定的那些時刻，例如每週一次。</aside><div class='pageno'>5 / 14</div></section>
+<section class='slide bullets' data-n='6' data-src='s06.md'><div class='content'><p class=kicker>第二部分・結果怎麼讀</p><h2>學出來的規則有比較好嗎？</h2><ul><li>若治療前 6 週都不再提高劑量（固定劑量規則），估計的第 6 週回到規律鴉片使用的風險為 0.388。 <sup class="fn">①</sup></li><li>學出的最佳規則，估計的第 6 週回到規律鴉片使用的風險為 0.324。 <sup class="fn">①</sup></li><li>論文報告學出的規則比固定劑量降低風險 16.6%（RR = 0.83; 95% CI, 0.68-1.02）。 <sup class="fn">①</sup></li><li>學出的規則與簡單的 d1 相比，估計降低 6.8%，但論文說這個差異不具意義。 <sup class="fn">①</sup></li></ul>
+<blockquote>這些都是「估計」；而且學出的規則和簡單的 d1 相比，差異不具意義。</blockquote></div><footer class='refs'><span>① Williams et al., Am J Epidemiol 2024, p.6</span></footer><aside class='notes'>風險（risk）就是「發生的比例」；RR（風險比，risk ratio）是兩個風險相除；信賴區間（confidence interval, CI）是估計的不確定範圍。重點是：和固定劑量比有降低，但和簡單規則比，論文自己說差異不具意義。</aside><div class='pageno'>6 / 14</div></section>
+<section class='slide bullets' data-n='7' data-src='s07.md'><div class='content'><p class=kicker>第三部分・前提</p><h2>用觀察資料學規則，先要有三個前提</h2><ul><li>用觀察資料學規則，論文列出三個前提：一致性、無未測量干擾（可交換性）、正值性（每一層的人都有機會接受各種治療）。 <sup class="fn">①</sup></li><li>所有要比較的規則都必須在資料中有支持，也就是要觀察到有人照每條規則做過。 <sup class="fn">①</sup></li><li>後面會看到的呼吸器研究：論文有調整年齡、血氣等協變數，但除了補值的敏感度分析，沒有看到對未測量干擾的敏感度分析。 <sup class="fn">②</sup></li></ul></div><footer class='refs'><span>① Williams et al., Am J Epidemiol 2024, p.3</span> <span>② Hong et al., EClinicalMedicine 2021, p.2</span></footer><aside class='notes'>觀察資料不是隨機分派的，所以要靠前提才能解讀。一致性＝在實際接受的那個治療下，假想的結局就是真正觀察到的結局；無未測量干擾（可交換性）＝同時影響治療和結局的因素都量到、也調整了；正值性＝資料裡每種人都有機會接受各種治療。最直覺的一條是正值性：如果資料裡沒人照某條規則做過，就沒有東西可以拿來學或比較。協變數＝要一併考慮的背景資料；敏感度分析＝換個假設，看結論會不會改變。</aside><div class='pageno'>7 / 14</div></section>
+<section class='slide bullets' data-n='8' data-src='s08.md'><div class='content'><p class=kicker>第四部分・基礎：單一時間點的估計</p><h2>先決定「想要的數字」，再選估計方法</h2><ul><li>這篇論文只討論二元治療（只有給或不給兩種）與單一時間點的資料，沒有談動態規則與最佳規則的學習。 <sup class="fn">①</sup></li><li>順序：科學問題 → 因果參數 → 統計估計目標 → 估計式 → 檢查能不能配機器學習 → 算標準誤。 <sup class="fn">②</sup></li><li>直接把機器學習的預測代入（代入式估計式），一般無法得到正確的推論。 <sup class="fn">③</sup></li><li>交叉擬合（cross-fitting）的簡單版本：樣本分兩半，前一半估計輔助模型、後一半算估計式，再交換角色並平均。 <sup class="fn">④</sup></li><li>在單一時間點的問題上，倍增穩健（doubly robust）的估計式搭配機器學習，仍可得到（大樣本下）涵蓋率符合宣稱的信賴區間。 <sup class="fn">⑤</sup></li></ul></div><footer class='refs'><span>① Renson et al., Am J Epidemiol 2025, p.2</span> <span>② Renson et al., Am J Epidemiol 2025, p.1–5</span> <span>③ Renson et al., Am J Epidemiol 2025, p.3</span> <span>④ Renson et al., Am J Epidemiol 2025, p.4</span> <span>⑤ Renson et al., Am J Epidemiol 2025, p.1</span></footer><aside class='notes'>這頁是估計的基礎功，不是學動態規則的方法。先講「你到底想知道哪個數字」，再挑工具。因果參數＝我們真正想知道的那個數字；統計估計目標＝這個數字能由資料算出的版本；估計式＝實際拿資料去算的公式；代入式估計式＝把機器學習的預測當成答案，直接放進公式。交叉擬合像考試：出題的人和評分用的資料不要是同一批，避免機器學習「背答案」。倍增穩健要分兩層：兩個輔助模型只要有一個設定正確，估計就一致；但要算出可信的信賴區間，論文的變異數估計要求兩個輔助模型都被一致地估計。</aside><div class='pageno'>8 / 14</div></section>
+<section class='slide bullets' data-n='9' data-src='s09.md'><div class='content'><p class=kicker>第四部分・方法路線二：因果樹</p><h2>看得懂的規則：因果樹</h2><ul><li>論文要找「可解釋、又能處理複雜關係」的方法，因為來自機器學習的路線多為黑箱，一般不適合個人化醫療。 <sup class="fn">①</sup></li><li>因果樹把病人分成幾群，每一群（葉子）的治療效果，就是該群治療組與未治療組平均結局的差。 <sup class="fn">②</sup></li><li>因果樹的版本（DTR-CT）可畫出每個時間步的決策樹，讓人看得懂規則；因果森林（DTR-CF）則看變數重要性。 <sup class="fn">③</sup></li><li>後悔值（regret）是學出的規則與真正最佳規則在結局上的差；決定相同時為零，越小越好。 <sup class="fn">④</sup></li><li>與表現最好的基準方法相比，累積後悔值降低超過 20 % <sup class="fn">①</sup>；在非線性交互作用的模擬情境，DTR-CT 降低 25.1 %、DTR-CF 降低 48.2 % <sup class="fn">④</sup></li></ul></div><footer class='refs'><span>① Blümlein et al., PMLR (MLHC) 2022, p.2</span> <span>② Blümlein et al., PMLR (MLHC) 2022, p.9</span> <span>③ Blümlein et al., PMLR (MLHC) 2022, p.10–11</span> <span>④ Blümlein et al., PMLR (MLHC) 2022, p.13</span></footer><aside class='notes'>因果樹像一張「分診流程圖」：醫師能順著問題一路看下去，知道為什麼這群人建議治療。因果森林＝許多棵因果樹的集成，用相似病人的加權平均估計每個人的治療效果。基準方法＝拿來比較的現有方法。後悔值就是「和真正最佳決定差多少」。模擬結果是在模擬資料上的表現，不等於真實病人的效果。</aside><div class='pageno'>9 / 14</div></section>
+<section class='slide bullets' data-n='10' data-src='s10.md'><div class='content'><p class=kicker>第四部分・連續劑量的例子</p><h2>例子：呼吸器的「劑量」也能動態調整</h2><ul><li>指引對 ARDS 病人的單一數值建議：潮氣量小於 6 ml/kg、平台壓小於 30 cmH2O。 <sup class="fn">①</sup></li><li>論文說這樣的單一值未必對所有急性呼吸衰竭病人都有益，因為族群有異質性。 <sup class="fn">①</sup></li><li>治療是連續的劑量：機械功率（把幾個呼吸器參數合成的一個數字）；規則在前 48 小時、每 8 小時輸出個人化的最佳劑量。 <sup class="fn">②</sup></li><li>第一步先不事先給標籤，讓模型把病人依病況自動分類；用兩種分群方法檢查，都指向 3 類。 <sup class="fn">③</sup></li><li>病人的類別會隨通氣天數改變，所以通氣策略要隨時調整，而不是一次決定到底。 <sup class="fn">④</sup></li></ul>
+<blockquote>實際用的機械功率比模型估出的最佳值偏低或偏高，都與住院死亡風險增加「有關」；這是關聯，不是證明調整後就能降低死亡。 <sup class="fn">⑤</sup></blockquote></div><footer class='refs'><span>① Hong et al., EClinicalMedicine 2021, p.1</span> <span>② Hong et al., EClinicalMedicine 2021, p.2–3</span> <span>③ Hong et al., EClinicalMedicine 2021, p.3–4</span> <span>④ Hong et al., EClinicalMedicine 2021, p.7</span> <span>⑤ Hong et al., EClinicalMedicine 2021, p.4</span></footer><aside class='notes'>劑量可以是連續的數字，不只是「給／不給」。急性呼吸衰竭＝需要立即處置的急症，論文定義為在室內空氣下低血氧與／或高二氧化碳。潮氣量、平台壓都是呼吸器的參數，保護性通氣會限制它們以減少肺損傷；機械功率＝把平台壓、呼吸速率與呼氣末正壓等參數合成的一個數字。分群像先把病人分成幾種「體質」，再各自決定怎麼調。最後一句要特別強調：這裡看到的是關聯，不是因果。</aside><div class='pageno'>10 / 14</div></section>
+<section class='slide bullets' data-n='11' data-src='s11.md'><div class='content'><p class=kicker>第五部分・方法路線三：強化學習</p><h2>另一條路：強化學習調胰島素</h2><ul><li>這篇研究的演算法叫 GLUCOSE，要建議心臟手術後第一天、每小時該給多少常規胰島素，目標是讓血糖落在適當範圍。 <sup class="fn">①</sup></li><li><strong>狀態（state）</strong>：病人某一小時的整體情況：人口學、共病、實驗室值、生命徵象、用藥、機械通氣與 SOFA 分數，另外加上前四小時的血糖。 <sup class="fn">②</sup></li><li><strong>行動（action）</strong>：每小時給多少常規胰島素；劑量是連續的，建議劑量上限為每小時 10 單位。 <sup class="fn">②</sup></li><li><strong>獎勵（reward）</strong>：依血糖是否在目標範圍打分：血糖在 140 至 180 mg/dL 時最高為 +0.2，離開範圍後罰則越來越重，最低到 −1。 <sup class="fn">②</sup></li><li>「離線」學習：只用已經收集好的紀錄來學，學習過程不與病人互動，不是在病人身上邊做邊試。 <sup class="fn">③</sup></li></ul></div><footer class='refs'><span>① Desman et al., npj Digit Med 2025, p.1</span> <span>② Desman et al., npj Digit Med 2025, p.9</span> <span>③ Desman et al., npj Digit Med 2025, p.2</span></footer><aside class='notes'>強化學習＝讓演算法靠「得分」學著決定下一步怎麼做；機械通氣＝用呼吸器幫病人呼吸；SOFA 分數＝論文用來反映病人嚴重度的指標之一。把它想成玩遊戲：看到畫面（狀態）、按按鈕（行動）、得到分數（獎勵）。差別是這裡不能真的拿病人練習，所以只看過去的紀錄來學。</aside><div class='pageno'>11 / 14</div></section>
+<section class='slide bullets' data-n='12' data-src='s12.md'><div class='content'><p class=kicker>第六部分・怎麼評估</p><h2>不能拿病人試，怎麼知道規則好不好？</h2><ul><li>離線策略評估（off-policy evaluation, OPE）不實際施行新策略，而是從既有資料估計它的表現；論文用它來估計 GLUCOSE 的表現。 <sup class="fn">①</sup></li><li>離線評估的結果：GLUCOSE 的估計報酬在內部測試為 0.0、外部驗證為 −0.63；醫師的報酬分別為 −1.29 與 −1.02。 <sup class="fn">②</sup></li><li>報酬是把上一頁的「獎勵」逐小時累加的分數；0.0 是作者設計的計分尺度上的數字，最高獎勵是 +0.2，所以 0.0 只表示在這個計分下的平均表現。 <sup class="fn">②</sup> <sup class="fn">①</sup></li><li>外部驗證資料 eICU-CRD 來自 208 家美國醫院，年份為 2014 年至 2015 年。 <sup class="fn">③</sup></li><li>醫師盲評的結果：GLUCOSE 的安全性、有效性與可接受度評分和所有人類建議相當，或顯著較高。 <sup class="fn">④</sup></li></ul>
+<blockquote>估計報酬高不等於證明比醫師好：它仍是對自己建議的離線估計，不是觀察到的病人結局。 <sup class="fn">②</sup></blockquote></div><footer class='refs'><span>① Desman et al., npj Digit Med 2025, p.9</span> <span>② Desman et al., npj Digit Med 2025, p.2</span> <span>③ Desman et al., npj Digit Med 2025, p.8</span> <span>④ Desman et al., npj Digit Med 2025, p.6</span></footer><aside class='notes'>離線評估像「用過去的比賽錄影，推測換一種打法會怎樣」；它是推測，不是真的上場。內部測試＝同一批資料裡留下來、沒用來訓練的病人；外部驗證＝別家醫院的資料。外部驗證和醫師盲評是從不同角度檢查，但都不等於在病人身上試過。</aside><div class='pageno'>12 / 14</div></section>
+<section class='slide compare' data-n='13' data-src='s13.md'><div class='content'><p class=kicker>第七部分・整理</p><h2>四個例子並排看</h2><table><thead><tr><th>例子</th><th>這個動態規則在決定什麼</th></tr></thead><tbody><tr><td>鴉片使用障礙的藥物劑量</td><td>在治療的前 6 週，何時該提高 BUP-NX 劑量，才能讓回到規律鴉片使用的風險最小。 <sup class="fn">①</sup></td></tr><tr><td>加護病房的機械通氣與血管加壓素</td><td>MIMIC-III 的加護病房觀察資料：依序決定要不要使用機械通氣或血管加壓素，目標是縮短住院時間。 <sup class="fn">②</sup></td></tr><tr><td>呼吸器的機械功率</td><td>連續的劑量（機械功率），規則在前 48 小時、每 8 小時的各個時間點輸出個人化的最佳劑量，而不是「給或不給」。 <sup class="fn">③</sup></td></tr><tr><td>心臟手術後的胰島素</td><td>GLUCOSE 要建議心臟手術後第一天、每小時該給多少常規胰島素，目標是讓血糖落在適當範圍。 <sup class="fn">④</sup></td></tr></tbody></table></div><footer class='refs'><span>① Williams et al., Am J Epidemiol 2024, p.4</span> <span>② Blümlein et al., PMLR (MLHC) 2022, p.14</span> <span>③ Hong et al., EClinicalMedicine 2021, p.2–3</span> <span>④ Desman et al., npj Digit Med 2025, p.1</span></footer><aside class='notes'>鴉片使用障礙（opioid use disorder）是 williams2024 範例的疾病情境；這個例子的治療目標，是不要回到規律使用鴉片。這頁收斂主題：臨床問題各不相同，但都是「在每個時間點，依病人當下的情況，決定治療」。注意有的是給不給，有的是連續劑量。</aside><div class='pageno'>13 / 14</div></section>
+<section class='slide bullets' data-n='14' data-src='s14.md'><div class='content'><p class=kicker>第七部分・結論</p><h2>帶走四個提醒</h2><ol><li>williams2024 提醒：最佳策略也可能其實是簡單的靜態規則；不同演算法在資料量有限時，表現可能不同。 <sup class="fn">①</sup></li><li>renson2025 說：使用這類估計式並不會自動處理餘下的誤差，還需要速率倍增穩健性（兩個輔助模型的誤差相乘後夠小）。 <sup class="fn">②</sup></li><li>以呼吸器研究為例：論文自己承認，把機械功率調到模型選出的水準是否真的改善結局，仍待驗證。 <sup class="fn">③</sup></li><li>以胰島素研究為例：論文自己承認這是回溯性研究，需要大型、多樣病人群的前瞻性研究與臨床試驗來驗證。 <sup class="fn">④</sup></li></ol>
+<blockquote>動態規則讓治療跟著病人調整；但從資料學出的規則，仍要驗證才能說它有益。</blockquote></div><footer class='refs'><span>① Williams et al., Am J Epidemiol 2024, p.6</span> <span>② Renson et al., Am J Epidemiol 2025, p.4</span> <span>③ Hong et al., EClinicalMedicine 2021, p.8</span> <span>④ Desman et al., npj Digit Med 2025, p.7</span></footer><aside class='notes'>帶走的是「謹慎」：動態規則是好想法，但複雜方法不一定勝過簡單規則，估計也不等於已證明有益。第二點的細節不在今天範圍，只要記得：估計方法還有額外的條件要檢查，不是用了就保證可信。第四點的重點是：論文自己說，目前的結果還需要前瞻性研究與臨床試驗來驗證。</aside><div class='pageno'>14 / 14</div></section>
+</div></div>
+<div class="bar" id="bar"></div>
+<div class="hint">← → 換頁 · N 講者備註 · ?all 全部攤開</div>
+<script>
+(function () {
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const all = new URLSearchParams(location.search).has('all');
+  let i = 0;
+  try { i = Math.max(0, Math.min(slides.length - 1, parseInt(location.hash.slice(1), 10) - 1 || 0)); } catch (e) {}
+  if (all) document.body.classList.add('all');
+  function fit() {
+    if (all) return;
+    const s = Math.min(window.innerWidth / 1280, window.innerHeight / 720) * 0.96;
+    document.getElementById('stage').style.transform = 'translate(-50%, -50%) scale(' + s + ')';
+  }
+  function show(k) {
+    i = Math.max(0, Math.min(slides.length - 1, k));
+    slides.forEach((el, j) => el.classList.toggle('active', j === i));
+    document.getElementById('bar').style.width = ((i + 1) / slides.length * 100) + '%';
+    if (!all) history.replaceState(null, '', '#' + (i + 1));
+  }
+  document.addEventListener('keydown', e => {
+    if (['ArrowRight', 'PageDown', ' '].includes(e.key)) show(i + 1);
+    if (['ArrowLeft', 'PageUp'].includes(e.key)) show(i - 1);
+    if (e.key === 'Home') show(0);
+    if (e.key === 'End') show(slides.length - 1);
+    if (e.key === 'n' || e.key === 'N') document.body.classList.toggle('show-notes');
+  });
+  document.getElementById('stage').addEventListener('click', e => {
+    if (all) return;
+    const r = e.currentTarget.getBoundingClientRect();
+    show(e.clientX - r.left > r.width / 3 ? i + 1 : i - 1);
+  });
+  let sx = null;
+  document.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
+  document.addEventListener('touchend', e => {
+    if (sx === null) return;
+    const dx = e.changedTouches[0].clientX - sx;
+    if (Math.abs(dx) > 40) show(dx < 0 ? i + 1 : i - 1);
+    sx = null;
+  });
+  window.addEventListener('resize', fit);
+  window.addEventListener('hashchange', () => {
+    const k = parseInt(location.hash.slice(1), 10) - 1;
+    if (!isNaN(k) && k !== i) show(k);
+  });
+  // G6 render check: list slides whose content or footer does not fit inside the 1280x720 slide.
+  window.deckOverflow = function () {
+    const bad = [];
+    slides.forEach((el, j) => {
+      const was = el.classList.contains('active');
+      el.classList.add('active');
+      const c = el.querySelector('.content');
+      const refs = el.querySelector('.refs');
+      const over = c.scrollHeight - c.clientHeight;
+      const wide = Array.from(c.querySelectorAll('*')).some(x => x.scrollWidth > x.clientWidth + 2 && getComputedStyle(x).overflowX !== 'visible');
+      if (over > 2 || wide || (refs && refs.getBoundingClientRect().bottom > el.getBoundingClientRect().bottom + 1)) {
+        bad.push({ slide: j + 1, src: el.dataset.src, overflowPx: over });
+      }
+      if (!was && !all) el.classList.remove('active');
+    });
+    show(i);
+    return bad;
+  };
+  fit(); show(i);
+})();
+</script>
+</body>
+</html>

@@ -136,8 +136,53 @@ def draft_files(d: Path) -> list[Path]:
     return sorted((d / "drafts").glob("s*.md"))
 
 
+GENERIC = {"策略"}  # everyday words that happen to be glossary entries
+
+
+def glossary_terms() -> list[str]:
+    """Chinese term names from the first column of wiki/glossary.md (2+ characters)."""
+    terms = []
+    for line in (WIKI / "glossary.md").read_text(encoding="utf-8").splitlines():
+        if line.startswith("|") and not line.startswith("|---"):
+            cell = line.strip("|").split("|")[0].strip()
+            for t in re.split(r"[／/、（）()]", cell):
+                t = t.strip()
+                if len(t) >= 2 and t not in {"中文"}:
+                    terms.append(t)
+    return sorted(set(terms), key=len, reverse=True)
+
+
+def check_terms(d: Path) -> list[str]:
+    """G4b (added in graph v2): a glossary term must be explained where it first appears.
+
+    'Explained' = on the slide where a term first appears in title/bullets, the term also
+    appears in that slide's `Note:` line or in a parenthesised gloss right after it, e.g.
+    「正值性（每一層的人都有機會…）」. Mentioning is a proxy; G5 still judges the quality.
+    """
+    errs, seen = [], set()
+    terms = glossary_terms()
+    for f in draft_files(d):
+        meta, body = front(f.read_text(encoding="utf-8"))
+        notes = " ".join(l for l in body if l.strip().startswith("Note:"))
+        main = meta.get("title", "") + "\n" + "\n".join(l for l in body if not l.strip().startswith("Note:"))
+        main_plain = CITE_RE.sub("", main)
+        masked = main_plain
+        for t in terms:  # longest first; mask matches so '森林' inside '因果森林' is not re-counted
+            if t in GENERIC or t not in masked:
+                continue
+            masked = masked.replace(t, "□")
+            if t in seen:
+                continue
+            seen.add(t)
+            glossed = re.search(re.escape(t) + r"[^\n]{0,2}（[^）]{6,}）", main_plain)
+            if t not in notes and not glossed:
+                errs.append(f"drafts/{f.name}: [terms] '{t}' first appears here but is not explained "
+                            f"(add a gloss in （…） or explain it in the Note)")
+    return errs
+
+
 def check_drafts(d: Path) -> list[str]:
-    errs = []
+    errs = check_terms(d)
     claims = load_claims(d)
     files = draft_files(d)
     if not files:
@@ -188,6 +233,7 @@ def check_html(d: Path) -> list[str]:
         return ["deck.html: [html] missing"]
     raw = f.read_text(encoding="utf-8")
     raw = re.sub(r"<script.*?</script>|<style.*?</style>", "", raw, flags=re.S)
+    raw = re.sub(r'<sup class="fn">.*?</sup>', "", raw)  # footnote markers replace mid-line citations
     text = re.sub(r"\s+", "", htmllib.unescape(re.sub(r"<[^>]+>", "", raw)))
     errs = []
     for df in draft_files(d):

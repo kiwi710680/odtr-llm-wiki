@@ -1,4 +1,18 @@
-# Workflow: /topic-slides — teaching HTML deck from the wiki (graph v1)
+# Workflow: /topic-slides — teaching HTML deck from the wiki (graph v2)
+
+Changes from v1 (after the first real run, see `docs/run_notes.md`):
+- **G4b term check moved forward** from the G5 AI review to a script at the draft node: a glossary
+  term must be glossed or explained in the Note on the slide where it first appears.
+- **Card subject rule** at N2: a claim names whose finding it is and its scope (which study, which
+  population). Two of the G5 failures (wrong attribution, over-generalisation) started in cards.
+- Draft length budget at N4: ≤5 bullets, each ≤ about 60 characters before the citation;
+  explanations go to the Note.
+- G5 reviews only slides changed since the last review.
+
+v2.1 (after round 2): the G4b term rule made the drafter add explanations, and 5 of them were
+textbook definitions the wiki does not contain (plus 1 that was wrong). So N4 may now also read
+`wiki/glossary.md` and the concept pages of its claims, and **a gloss must be copied or condensed
+from those pages** — the same "only from the wiki" rule as bullets. G5 checks glosses against them.
 
 Input: a topic sentence. Output: `topic-<slug>/deck.html` + `topic-<slug>/report.md`.
 Only wiki content may be used — never `raw/` and never general knowledge.
@@ -33,7 +47,7 @@ N1 retrieve ──► G1 coverage gate ──► N2 evidence cards (one per sour
 | N1 retrieve | `wiki/index.md`, page frontmatter | `sources.md` (pages + why) | read `raw/` |
 | N2 cards | one source page + the concept/synthesis pages that cite that source | `cards/<id>.md` | mix in another source's claims |
 | N3 outline | `cards/` | `outline.md` | add claims not on a card |
-| N4 drafts | `outline.md` + the cards a slide is assigned | `drafts/sNN.md` | cite anything outside its assigned claims |
+| N4 drafts | `outline.md` + the cards a slide is assigned (+ v2.1: `wiki/glossary.md` and concept pages, for glosses only) | `drafts/sNN.md` | cite anything outside its assigned claims; write a gloss the wiki does not support |
 | G5 review | one draft + its claims' wiki pages | `review.md` | edit drafts itself |
 | N5 render | passed drafts | `deck.html` | change a single word |
 | G* checks | product + its sources | check output | fix things themselves |
@@ -64,6 +78,8 @@ Lines with a number or a factual statement carry the citation of the claim they 
   confirms the outline.
 - G4 `... drafts` — every slide has ≥1 citation; citations ⊆ assigned claims; numbers appear in
   the assigned claims; numbers found on the raw page.
+- G4b (v2, same command) — every `wiki/glossary.md` term is glossed in （…） or named in the Note on
+  the slide where it first appears.
 - G5 fresh-context reviewer (a new agent that never saw the drafting): per slide PASS/FAIL on
   faithfulness to the cited wiki page and on "would a beginner understand this".
 - G6 `... html` — every draft line's text appears in `deck.html`; then the browser overflow check
