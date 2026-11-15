@@ -13,7 +13,9 @@ WIKI = ROOT / "wiki"
 CITE_RE = re.compile(r"\[([a-z]+\d{4}),\s*pp?\.\s*(\d+)(?:\s*[-–]\s*(\d+))?\]")
 LINK_RE = re.compile(r"\[\[([^\]|#]+)(?:[|#][^\]]*)?\]\]")
 # A "number" = digits with optional decimal part, not part of a word like "p3" or "k=2" ids.
-NUM_RE = re.compile(r"(?<![\w.])(\d+(?:[.,]\d+)*)(?![\w])")
+# Boundaries are ASCII-only: CJK characters count as \w in Python, so a \w boundary made
+# numbers glued to Chinese text (e.g. 共8059人) invisible to the check (fixed 2026-11-15).
+NUM_RE = re.compile(r"(?<![A-Za-z0-9_.])(\d+(?:[.,]\d+|, \d{3}(?!\d))*)(?![A-Za-z0-9_])")
 
 
 @lru_cache(maxsize=None)
@@ -31,7 +33,7 @@ def source_pages(src_id: str) -> dict[int, str] | None:
 
 def normalise(text: str) -> str:
     text = text.replace("−", "-").replace(" ", " ").replace(" ", " ")
-    text = re.sub(r"(?<=\d),(?=\d{3})", "", text)  # 1,234 -> 1234
+    text = re.sub(r"(?<=\d), ?(?=\d{3}\b)", "", text)  # 1,234 and "5, 000" (PDF extraction) -> 1234
     text = re.sub(r"(?<=\d) (?=\d{3}\b)", "", text)  # 1 234 -> 1234
     text = re.sub(r"(?<=\d)\s*\.\s*(?=\d)", ".", text)  # "0. 5" -> "0.5"
     return text
@@ -50,7 +52,7 @@ def strip_markup(line: str) -> str:
 def numbers_in(line: str) -> list[str]:
     nums = []
     for m in NUM_RE.finditer(strip_markup(line)):
-        n = re.sub(r"(?<=\d),(?=\d{3})", "", m.group(1))
+        n = re.sub(r"(?<=\d), ?(?=\d{3}\b)", "", m.group(1))
         nums.append(n)
     return nums
 

@@ -10,4 +10,8 @@ assert any("unknown source" in p for p in chk("x [nobody2020, p.1]"))
 assert any("has no page" in p for p in chk("x [williams2024, p.99]"))
 assert chk("分成 2 個階段，見 [[q-learning]]") != []  # number with no cite still flagged
 assert chk("沒有數字的句子") == []
+assert any("without a citation" in p for p in chk("共98765人"))  # number glued to CJK
+from common import numbers_in
+assert numbers_in("N = 5, 000 人") == ["5000"], numbers_in("N = 5, 000 人")
+assert numbers_in("分 2, 3 組") == ["2", "3"], numbers_in("分 2, 3 組")
 print("test_common: all assertions passed")
